@@ -1,4 +1,4 @@
-# :checkered_flag: The Optical Store
+# :checkered_flag: Glasses Store, uma loja de venda de artigos ópticos
 
 Breve descrição do que o seu projeto faz.
 
