@@ -1,0 +1,62 @@
+a {
+    text-decoration: none;
+    color: rgba(255, 0, 17);
+}
+
+#glasses {
+    margin-top: 20px;
+    margin-left: 30px;
+    width: 68px;
+    height: 54px;
+    color: black;
+}
+
+#titlle {
+    position: absolute;
+    font-family: 'Poppins';
+    margin-left: 120px;
+    margin-top: -50px;
+    color: rgba(255, 0, 17);
+    letter-spacing: 0.02em;
+}
+
+#list-actions {
+    position: absolute;
+    font-family: 'Poppins';
+    font-style: normal;
+    width: 390.11;
+    margin-top: -60px;
+    margin-left: 800px;
+    margin-right: 183.89px;
+}
+
+#sunglasses,
+#gradeglasses,
+#aboutus {
+    padding-right: 15px;
+}
+
+#header__main__search-user-cart {
+    margin-left: 1140px;
+    position: absolute;
+    margin-top: -65px;
+    padding-right: 15px;
+}
+
+#profilelink,
+#homelink,
+#cartlink {
+    padding-right: 25px;
+}
+
+.items a:hover {
+    color: currentColor;
+    background-color: linen;
+    border-style: groove;
+    border-radius: 10px;
+}
+
+.background-border {
+    background-color: tan;
+    border-radius: 2%;
+}
