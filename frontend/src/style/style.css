@@ -1,62 +1,63 @@
-a {
-    text-decoration: none;
-    color: rgba(255, 0, 17);
+.nav-bar{
+border-bottom:2px solid rgb(0,0,0);
 }
-
 #glasses {
-    margin-top: 20px;
-    margin-left: 30px;
+    position: absolute;
     width: 68px;
     height: 54px;
-    color: black;
+    left: 55px;
+    top: 35px;
 }
 
 #titlle {
     position: absolute;
+    width: 187px;
+    height: 54px;
+    left: 145px;
+    top: 15px;
     font-family: 'Poppins';
-    margin-left: 120px;
-    margin-top: -50px;
-    color: rgba(255, 0, 17);
+    font-style: normal;
+    font-weight: 600;
+    font-size: 36px;
+    line-height: 54px;
+    /* identical to box height */
     letter-spacing: 0.02em;
+    color: #FF0011;
 }
 
 #list-actions {
     position: absolute;
     font-family: 'Poppins';
     font-style: normal;
-    width: 390.11;
-    margin-top: -60px;
-    margin-left: 800px;
-    margin-right: 183.89px;
+    position: absolute;
+    width: 398.11px;
+    height: 28px;
+    left: 820px;
+    top: 36px;
 }
 
+#list-actions a {
+    text-decoration: none;
+    color: rgba(97, 97, 97);
+}
 #sunglasses,
-#gradeglasses,
-#aboutus {
+#gradeglasses {
     padding-right: 15px;
 }
 
 #header__main__search-user-cart {
-    margin-left: 1140px;
     position: absolute;
-    margin-top: -65px;
-    padding-right: 15px;
+    width: 130px;
+    height: 33px;
+    left: 1200px;
+    top: 50px;
 }
-
-#profilelink,
-#homelink,
-#cartlink {
-    padding-right: 25px;
+#profilelink,#homelink {
+    padding-right:25px;
 }
 
 .items a:hover {
-    color: currentColor;
-    background-color: linen;
-    border-style: groove;
-    border-radius: 10px;
-}
-
-.background-border {
-    background-color: tan;
-    border-radius: 2%;
+    border-bottom: 3px solid;
+    border-color:#FF0011;
+    border-radius: 1px;
 }
