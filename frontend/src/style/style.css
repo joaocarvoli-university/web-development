@@ -1,0 +1,12 @@
+footer {
+  background-color: rgba(26, 46, 53, 0.18);
+  font-family: 'Poppins';
+}
+
+ul {
+  list-style-type: none;
+}
+
+.payment,.social {
+  font-size: smaller;
+}
