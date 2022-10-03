@@ -10,3 +10,7 @@ ul {
 .payment,.social {
   font-size: smaller;
 }
+
+.social {
+  margin-left: 33px;
+}
