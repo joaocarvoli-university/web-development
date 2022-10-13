@@ -1,0 +1,22 @@
+nav{ 
+    font-family: 'Poppins';
+    border-bottom: 2px solid #FF0011;
+}
+
+#titlle {
+    color: #FF0011;
+}
+
+li a:hover{
+    text-decoration:2px underline #FF0011;
+
+}
+.products{
+    margin-left: 550px;
+}
+.dropdown-menu{
+    display:flex;
+}
+.actions{
+    margin-left: 920px;
+}
