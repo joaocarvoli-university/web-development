@@ -1,0 +1,44 @@
+{
+  "kind": "collectionType",
+  "collectionName": "many_glasses",
+  "info": {
+    "singularName": "glasses",
+    "pluralName": "many-glasses",
+    "displayName": "Glasses",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "color": {
+      "type": "string"
+    },
+    "brand": {
+      "type": "string"
+    },
+    "price": {
+      "type": "float"
+    },
+    "amount": {
+      "type": "integer"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "sunglasses",
+        "prescriptionGlasses"
+      ]
+    },
+    "glassesId": {
+      "type": "uid"
+    }
+  }
+}
