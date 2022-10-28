@@ -1,0 +1,24 @@
+.navbar{ 
+    font-family: 'Poppins';
+    border-bottom: 3px solid #FF0011;
+}
+
+
+#glasses{
+ display: flex;
+ align-items: top;
+}
+#titlle {
+    color: #FF0011;
+}
+
+li a:hover{
+    text-decoration:2px underline #FF0011;
+
+}
+.products{
+    margin-left: 550px;
+}
+.actions{
+    margin-left: 920px;
+}

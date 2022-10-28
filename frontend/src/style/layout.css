@@ -5,8 +5,13 @@ nav{
 
 #titlle {
     color: #FF0011;
+    display:inline-block;
+    align-items:left;
 }
-
+.navbar-brands{
+    display: inline-block;
+    align-items:left;
+}
 li a:hover{
     text-decoration:2px underline #FF0011;
 
