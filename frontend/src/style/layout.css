@@ -12,6 +12,7 @@ nav{
     display: inline-block;
     align-items:left;
 }
+
 li a:hover{
     text-decoration:2px underline #FF0011;
 
