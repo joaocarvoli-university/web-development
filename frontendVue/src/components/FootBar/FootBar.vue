@@ -1,8 +1,8 @@
 <script setup>
   import 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js'
-  import Payment from './Payment.vue'
-  import Contact from './Contact.vue'
-  import SocialMedia from './SocialMedia.vue'
+  import Payment from '../components/FootBar/Payment.vue'
+  import Contact from '../components/FootBar/Contact.vue'
+  import SocialMedia from '../components/FootBar/SocialMedia.vue'
 </script>
 
 <template>
