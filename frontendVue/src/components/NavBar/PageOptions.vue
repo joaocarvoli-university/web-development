@@ -1,5 +1,11 @@
 <template>
-  <li class="nav-item"><a class="items nav-link active" aria-current="page" href="#">Home</a></li>
-  <li class="items nav-item"><a class="nav-link active" aria-current="page" href="#">Perfil</a></li>
-  <li class="items nav-item"><a class="nav-link active" aria-current="page" href="#">Carrinho</a></li>
+  <li class="nav-item">
+    <router-link class="items nav-link active" aria-current="page" to="/login">SingUp teste</router-link>
+  </li>
+  <li class="items nav-item">
+    <router-link class="nav-link active" aria-current="page" to="/profile">Profile test</router-link>
+  </li>
+  <li class="items nav-item">
+    <router-link class="nav-link active" aria-current="page" to="/singup">SingUp test</router-link>
+  </li>
 </template>
