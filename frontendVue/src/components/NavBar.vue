@@ -12,8 +12,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
   </head>
   
-  <div class="navbar navbar-expand-lg navbar-light bg-light">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
+      <img src="../assets/cool-glasses.png" id="glasses" alt="glasses" width="68px" height="54px">
       <Logo></Logo>
       <div class="navbar-collapse"> <!--collapse impede a renderização-->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
@@ -25,13 +26,12 @@
         <SearchBar></SearchBar>
       </div>
     </div>
-  </div>
+  </nav>
 </template>
 
 <style>
 nav {
   font-family: 'Poppins';
-  border-bottom: 2px solid #FF0011;
 }
 
 #titlle {

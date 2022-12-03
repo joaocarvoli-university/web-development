@@ -9,3 +9,9 @@
     <router-link class="nav-link active" aria-current="page" to="/singup">SingUp test</router-link>
   </li>
 </template>
+
+<style>
+li {
+   display: inline-block;
+}
+</style>
