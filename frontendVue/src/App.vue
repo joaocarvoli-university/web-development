@@ -1,7 +1,6 @@
 <script setup>
 import NavBar from './components/NavBar.vue'
 import FootBar from './components/FootBar.vue'
-import Profile from './views/Profile.vue'
 </script>
 
 <template>
@@ -11,3 +10,8 @@ import Profile from './views/Profile.vue'
 </template>
 
 
+<style>
+div {
+    font-family: 'Poppins';
+}
+</style>

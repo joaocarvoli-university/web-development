@@ -3,6 +3,7 @@ import Login from '../views/Login.vue'
 import Profile from '../views/Profile.vue'
 import SingUp from '../views/SingUp.vue'
 import Home from '../views/Home.vue'
+import SunGlasses from '../views/SunGlasses.vue'
 
 const routes = [
   {
@@ -24,6 +25,11 @@ const routes = [
     path: "/singup",
     component: SingUp,
     nome: 'singup'
+  },
+  {
+    path: "/sunglasses",
+    component: SunGlasses,
+    nome: 'sunglasses'
   }
 ]
 

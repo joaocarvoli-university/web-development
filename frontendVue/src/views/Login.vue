@@ -29,7 +29,7 @@ import NavBar from '../components/NavBar.vue'
               <div class="d-flex row">
                   <a class="mb-4" href="#">Esqueceu a senha?</a>
                   <button type="submit" class="btn btn-danger btn-sm mb-2" id="btn-submitForm">Entrar</button>
-                  <h6>Não tem uma conta?<a href="singup.html">Inscreva-se</a></h6>
+                 <h6>Não tem uma conta? <router-link to="/SingUp">Inscreva-se</router-link></h6>
               </div>
           </form>
       </div>
