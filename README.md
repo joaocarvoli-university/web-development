@@ -27,7 +27,7 @@ Carrinho
   - Os usuários poderão ler sobre nós da nossa empresa, assim como visualizar os produtos disponíveis no estoque.
 
 - Acessível a usuários logados:
-  - Os usuários poderão adicionar qualquer produto que esteja disponível no estoque ao carrinho, como também poderão comprar ,editar e excluir os produtos.
+  - Os usuários poderão adicionar qualquer produto que esteja disponível no estoque ao carrinho, como também poderão comprar ,editar e excluir os produtos do seu carrinho.
 
 
 ## :desktop_computer: Tecnologias e frameworks utilizados
