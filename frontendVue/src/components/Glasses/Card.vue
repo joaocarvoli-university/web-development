@@ -1,3 +1,14 @@
+<script setup lang="ts">
+
+defineProps<{
+  id: number,
+  name: string,
+  price: number,
+  description: string
+}>()
+
+</script>
+
 <template>
   <div class="col-md-6 col-lg-4 col-xl-3">
     <div id="product-1" class="single-product">
@@ -8,8 +19,8 @@
         </ul>
       </div>
       <div class="part-2">
-        <h3 class="product-title">Óculos de sol rayban</h3>
-        <h4 class="product-price">R$ 149.99</h4>
+        <h3 class="product-title">{{name}}</h3>
+        <h4 class="product-price">Price: {{price}}</h4>
       </div>
     </div>
   </div>

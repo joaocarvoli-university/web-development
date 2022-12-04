@@ -1,8 +1,27 @@
 <script setup>
 import 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js'
 import Card from '../components/Glasses/Card.vue'
+import { ref, onBeforeMount } from 'vue'
+import { api } from '../baseConfig'
 
-var items = [1,2,3,4]
+let items = {}
+
+async function allGlasses(){
+    try {
+        const { data, status } = await api.get("/many-glasses")
+        const response = data.data
+        if(status == 200){
+            items = response
+        }
+    }
+    catch(error){
+        console.log(error)
+    }
+}
+
+onBeforeMount(async() => allGlasses())
+
+
 
 </script>
 
@@ -21,8 +40,14 @@ var items = [1,2,3,4]
             <h1>Óculos de sol</h1>
           </div>
         </div>
-        <div class="row" v-for="item in items">
-          <Card></Card>
+        <div class="row">
+        <Card v-for="item in items"
+        :id="item.atributes.id"
+        :name="item.atributes.name"
+        :price="item.atributes.price"
+        :description="item.atributes.description"
+        >
+        </Card>
         </div>
       </div>
     </div>
