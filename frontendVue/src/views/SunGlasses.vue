@@ -4,14 +4,14 @@ import Card from '../components/Glasses/Card.vue'
 import { ref, onBeforeMount } from 'vue'
 import { api } from '../baseConfig'
 
-let items = {}
+const items = ref([])
 
 async function allGlasses(){
     try {
         const { data, status } = await api.get("/many-glasses")
         const response = data.data
         if(status == 200){
-            items = response
+            items.value = response
         }
     }
     catch(error){
@@ -41,11 +41,11 @@ onBeforeMount(async() => allGlasses())
           </div>
         </div>
         <div class="row">
-        <Card v-for="item in items"
-        :id="item.atributes.id"
-        :name="item.atributes.name"
-        :price="item.atributes.price"
-        :description="item.atributes.description"
+        <Card v-for="item in items" :key="item.id"
+        :id="item.id"
+        :name="item.attributes.name"
+        :price="item.attributes.price"
+        :description="item.attributes.description"
         >
         </Card>
         </div>

@@ -1,12 +1,11 @@
-<script setup lang="ts">
+<script setup>
 
-defineProps<{
-  id: number,
-  name: string,
-  price: number,
-  description: string
-}>()
-
+defineProps({
+  id: Number,
+  name: String,
+  price: Number,
+  description: String
+})
 </script>
 
 <template>
