@@ -1,39 +1,54 @@
-<script>
+<script setup>
 import 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js'
-import NavBar from '../components/NavBar.vue'
-// Missing validation
+import { ref } from 'vue'
+
+const identifier = ref("")
+const password = ref("")
+let msg = ref("")
+
+function validateEmail(){
+    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(identifier.value)) {
+        msg.value = "email válido"
+    } else {
+        msg.value = "email inválido"
+    }
+}
 </script>
 
 
 <template>
-  <head>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
-  </head>
-  <div class="alignment">
-      <div class="card card-login container" style="width: 26rem;">
-          <form class="form-login needs-validation" novalidate>
-              <img src="../assets/cool-glasses.png" width="48" alt="imagem do twitter" />
-              <h4>Entre Na Óptica Store agora mesmo</h4>
-              <div class="form-floating mb-3">
-                  <input type="email" class="form-control" id="Email" placeholder="name@example.com" required>
-                  <label for="Email"><strong>Email:</strong></label>
-                  <div class="invalid-feedback">
-                      Informe um e-mail válido.
-                  </div>
-              </div>
-              <div class="form-floating">
-                  <input type="password" class="form-control" id="Password" placeholder="Password" minlength="6" required>
-                  <label for="Password"><strong>Senha:</strong></label>
-              </div>
-              <div class="d-flex row">
-                  <a class="mb-4" href="#">Esqueceu a senha?</a>
-                  <button type="submit" class="btn btn-danger btn-sm mb-2" id="btn-submitForm">Entrar</button>
-                 <h6>Não tem uma conta? <router-link to="/SingUp">Inscreva-se</router-link></h6>
-              </div>
-          </form>
-      </div>
-  </div>
+    <head>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+            integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    </head>
+    <div class="alignment">
+        <div class="card card-login container" style="width: 26rem;">
+            <form class="form-login needs-validation" novalidate>
+                <img src="../assets/cool-glasses.png" width="48" alt="imagem do twitter" />
+                <h4>Entre Na Óptica Store agora mesmo</h4>
+                <div class="form-floating mb-3">
+                    <input type="email" v-model="identifier" class="form-control" id="Email"
+                        placeholder="name@example.com" required @change="validateEmail">
+                    <label for="Email"><strong>Email:</strong></label>
+                    <div class="invalid-feedback" v-if="msg.length > 0">
+                        {{msg}}
+                    </div>
+                </div>
+                <div class="form-floating">
+                    <input type="password" v-model="password" class="form-control" id="Password" placeholder="Password"
+                        minlength="6" required>
+                    <label for="Password"><strong>Senha:</strong></label>
+                </div>
+                <div class="d-flex row">
+                    <a class="mb-4" href="#">Esqueceu a senha?</a>
+                    <button disabled type="submit" class="btn btn-danger btn-sm mb-2"
+                        id="btn-submitForm">Entrar</button>
+                    <h6>Não tem uma conta? <router-link to="/SingUp">Inscreva-se</router-link></h6>
+                </div>
+            </form>
+        </div>
+    </div>
 </template>
 
 

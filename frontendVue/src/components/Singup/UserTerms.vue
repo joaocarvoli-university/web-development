@@ -10,7 +10,4 @@
         <input type="radio" name="concordar" id="nao">
         <label for="nao">Não</label>
     </div>
-    <div class="register">
-        <button type="submit" class="btn btn-danger btn-sm mb-2" id="btn-submitForm">Se inscrever</button>
-    </div>
 </template>

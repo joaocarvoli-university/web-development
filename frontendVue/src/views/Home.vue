@@ -1,17 +1,19 @@
 <template>
-  <div class="image-box">
-    <div class="text-main">
+  <div class="container">
+  <div class="row">
+    <div class="col-2 text-main">
       <h1><strong>Seja bem vido(a)</strong></h1>
       <p>ao lugar onde se preocupamos com a <br> sua visão!</p>
     </div>
     <router-link to="/login">
       <button type="button" class="login-button btn btn-danger">Fazer login <i class="bi bi-arrow-right"></i></button>
     </router-link>
-      
-    
-
-    <img class="constumer-photo" src="../assets/diadoconsumidor.png">
+    <div class="col">
+      <img class="constumer-photo" src="../assets/diadoconsumidor.png">
+    </div>
   </div>
+</div>
+    
 </template>
 
 <style>
@@ -19,36 +21,32 @@
   margin-left: 33px;
 }
 
-.image-box {
-  width: 1400px;
-  height: 500px;
-  top: 87px;
-  background: #F3F3F3;
-  border-radius: 15px;
+body {
+  background-color: rgb(255, 255, 255);
 }
 
 .constumer-photo {
   position: absolute;
   width: 450px;
   height: 450px;
-  left: 850px;
-  top: 110px;
+  left: 70%;
+  top: 20%;
   border-radius: 45px;
 }
 
 .text-main {
   position: absolute;
-  width: 473px;
-  height: 147px;
-  left: 86px;
-  top: 213px;
+  width: 50%;
+  height: 70%;
+  left: 10%;
+  top: 40%;
 }
 
 .login-button {
   position: absolute;
-  width: 140px;
+  width: 160px;
   height: 50px;
-  left: 86px;
-  top: 380px;
+  left: 14%;
+  top: 52%;
 }
 </style>
