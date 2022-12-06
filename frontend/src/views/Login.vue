@@ -18,10 +18,10 @@ const validationMessage = ref("")
 let msg = ref("")
 
 function validateEmail(){
-    if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(identifier.value)) {
-        msg.value = "email válido"
-    } else {
+    if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(identifier.value)) {
         msg.value = "email inválido"
+    } else {
+        msg.value = ""
     }
 }
 
@@ -62,7 +62,7 @@ async function authenticate(event){
                     <input type="email" v-model="identifier" class="form-control" id="Email"
                         placeholder="name@example.com" required @change="validateEmail">
                     <label for="Email"><strong>Email:</strong></label>
-                    <div class="invalid-feedback" v-if="msg.length > 0">
+                    <div v-if="msg.length > 0">
                         {{msg}}
                     </div>
                 </div>
