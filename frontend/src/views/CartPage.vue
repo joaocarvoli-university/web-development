@@ -1,9 +1,10 @@
 <script setup>
 import 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js'
-import Card from '../components/Glasses/Card.vue'
+import Cart from '../components/Cart.vue'
 import { onBeforeMount } from 'vue'
 import { useGlassesStore } from '../stores/glasses.js'
 import { ref } from 'vue'
+
 const items = ref([])
 const glassesStore = useGlassesStore()
 
@@ -23,22 +24,21 @@ onBeforeMount(async() => getGlassesUpdate())
 
 <template>
   <section class="section-products">
-
     <div class="container">
       <div class="row justify-content-center text-center">
         <div class="col-md-8 col-lg-6">
           <div class="header">
-            <h1>Óculos de sol</h1>
+            <h1>Carrinho</h1>
           </div>
         </div>
         <div class="row">
-        <Card v-for="item in items" :key="item.id"
+        <Cart v-for="item in items" :key="item.id"
         :id="item.id"
         :name="item.attributes.name"
         :price="item.attributes.price"
         :description="item.attributes.description"
         >
-        </Card>
+        </Cart>
         </div>
       </div>
     </div>
@@ -101,6 +101,7 @@ a:hover {
 }
 
 .section-products #product-1 .part-1::before {
+    background: url("https://images.unsplash.com/photo-1574258495973-f010dfbb5371?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80") no-repeat center;
     background-size: cover;
     transition: all 0.3s;
 }

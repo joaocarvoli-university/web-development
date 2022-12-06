@@ -12,6 +12,7 @@ export const Glasses = {
 }
 
 
+
 export const useGlassesStore = defineStore('Glasses', ()=> {
     async function all(){
         try {
@@ -58,12 +59,12 @@ export const useGlassesStore = defineStore('Glasses', ()=> {
 
     async function remove(id) {
         try {
-            const { data } = await api.delete(`/many-/${id}`, {
+            const { data } = await api.delete(`/many-glasses/`,{params : {id: id}}, {
                 headers: authenticationHeader(store.token)
             })
-            const mangaDeleted = mangas.value.find( manga => manga.id === id)
-            if (mangaDeleted) {
-                mangas.value.splice(mangas.value.indexOf(mangaDeleted), 1)
+            const glassDeleted = Glasses.value.find( Glasses => Glasses.id === id)
+            if (glassDeleted) {
+                Glasses.value.splice(Glasses.value.indexOf(glassDeleted), 1)
             }
             return data.data
         } catch(error) {

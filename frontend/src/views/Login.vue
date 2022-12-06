@@ -1,11 +1,20 @@
 <script setup>
 import 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js'
 import { ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router';
 import { useUserStore } from '../stores/user';
+import { isApplicationError } from '../mixing/errorMessageMixing'
+
 
 const userStore = useUserStore()
 const identifier = ref("")
 const password = ref("")
+const router = useRouter()
+const route = useRoute()
+
+const validated = ref(false)
+const validationMessage = ref("")
+
 let msg = ref("")
 
 function validateEmail(){
@@ -16,8 +25,26 @@ function validateEmail(){
     }
 }
 
-function doLogin(){
-    userStore.authenticate(identifier.value, password.value)
+async function authenticate(event){
+    event.preventDefault()
+    event.stopPropagation()
+    validated.value = true
+    if(identifier.value && password.value) {
+        const result = await userStore.authenticate(identifier.value, password.value)
+        if(result){
+            validationMessage.value = ""
+            let redirect = "/"
+            /*if(store.isAdmin) {
+                redirect = route.query.redirect ? route.query.redirect: "/sunglasses"
+            }*/
+            router.push(redirect)
+        }
+        if(isApplicationError(result)) {
+            validationMessage.value = result.message
+        } else {
+            
+        }
+    }
 }
 
 
@@ -46,8 +73,8 @@ function doLogin(){
                 </div>
                 <div class="d-flex row">
                     <a class="mb-4" href="#">Esqueceu a senha?</a>
-                    <button type="submit" class="btn btn-danger btn-sm mb-2"
-                        id="btn-submitForm" @click="doLogin">Entrar</button>
+                    <button type="submit" class="btn btn-doLogindanger btn-sm mb-2"
+                        id="btn-submitForm" @click="authenticate">Entrar</button>
                     <h6>Não tem uma conta? <router-link to="/SingUp">Inscreva-se</router-link></h6>
                 </div>
             </form>

@@ -1,6 +1,8 @@
 import { api } from '../baseConfig'
 import { defineStore } from 'pinia'
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
+import { getAppError } from '../mixing/errorMessageMixing'
+
 
 export const User = {
     id: String,
@@ -9,23 +11,18 @@ export const User = {
     username: String
 }
 
-const user = ref(User)
-
 
 export const useUserStore = defineStore('User', () =>{
-    async function authenticate(login, password) {
+    const user = ref<User>({})
+
+    async function authenticate(identifier, password) {
         try {
-            const res = await api.post('/auth/local', {
-                identifier: login,
-                password: password
-            })
-            const { data } = res
-            user.value = {
-                id: data.user.id,
-                username: data.user.username,
-                email: data.user.email,
-                jwt: data.jwt,
-            }
+            const res = await api.post("/auth/local", {
+                identifier,
+                password
+              })
+              const { data } = res
+              return data
         } catch(error) {
             const appError = getAppError(error)
             if(appError.name === "ValidationError") {

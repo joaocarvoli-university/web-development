@@ -4,6 +4,7 @@ import Profile from '../views/Profile.vue'
 import SingUp from '../views/SingUp.vue'
 import Home from '../views/Home.vue'
 import SunGlasses from '../views/SunGlasses.vue'
+import Cart from '../views/CartPage.vue'
 
 const routes = [
   {
@@ -30,6 +31,11 @@ const routes = [
     path: "/sunglasses",
     component: SunGlasses,
     nome: 'sunglasses'
+  },
+  {
+    path: "/cart",
+    component: Cart,
+    nome: 'cart'
   }
 ]
 

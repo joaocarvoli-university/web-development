@@ -1,3 +1,8 @@
+<script setup>
+//import  Cart  from "./components/Cart.vue";
+</script>
+  
+  
 <template>
 <nav class="navbar navbar-expand-lg bg-light">
   <div class="container-fluid">
@@ -11,7 +16,7 @@
           <router-link class="nav-link active" to="/profile">Perfil</router-link>
         </li>
         <li class="nav-item ">
-          <a class="nav-link active" href="#">Carrinho</a>
+          <router-link class="nav-link active" to="/cart">Carrinho</router-link>
         </li>
         <li class="nav-item dropdown ">
           <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
