@@ -101,6 +101,9 @@ a:hover {
 .section-products #product-1 .part-1::before {
     background-size: cover;
     transition: all 0.3s;
+    /*
+background: url("https://specials-images.forbesimg.com/imageserve/6287a5e14dc845aa4bc60506/Prescription-glasses-online--Gucci-GG0675O-Eyeglasses/960x0.jpg?cropX1=165&cropX2=1288&cropY1=0&cropY2=748") no-repeat center;
+*/
 }
 
 .section-products .single-product .part-1 ul {
@@ -118,7 +121,6 @@ a:hover {
     bottom: 30px;
     opacity: 1;
 }
-
 .section-products .single-product .part-1 ul li {
     display: inline-block;
     margin-right: 4px;

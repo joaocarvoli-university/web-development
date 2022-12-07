@@ -138,14 +138,4 @@ a:hover {
     transition: color 0.2s;
 }
 
-
-.section-products .single-product .part-2 .product-title {
-    font-size: 1rem;
-}
-
-.section-products .single-product .part-2 h4 {
-    display: inline-block;
-    font-size: 1rem;
-}
-
 </style>
