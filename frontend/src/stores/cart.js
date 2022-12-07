@@ -2,33 +2,21 @@ import { api } from '../baseConfig'
 import { defineStore } from 'pinia'
 
 
-export const Glasses = {
-    id: String,
-    amount:Number,
-    price: Number,
-    name: String,
-    description: String
-}
-
-
-export const cart = {
-    glasses: Glasses,
-}
 
 export const useGlassesStore = defineStore('Car', () => {
-
-      async function all(){
+    async function userCart(idUser) {
         try {
-            const { data, status } = await api.get("/cart")
+            const { data, status } = await api.get(`/carts?filters[userId][$eq]=${idUser}&populate=*`)
             const response = data.data
-            if(status == 200){
+            if (status == 200) {
                 return response
             }
         }
-        catch(error){
+        catch (error) {
+            console.log(error)
             return error
         }
     }
 
-    return {all}
+    return { userCart }
 })

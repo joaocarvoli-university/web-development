@@ -39,7 +39,7 @@ const routes = [
     nome: 'prescriptionGlasses'
   },
   {
-    path: "/cart",
+    path: "/cart/:id",
     component: Cart,
     nome: 'cart'
   }

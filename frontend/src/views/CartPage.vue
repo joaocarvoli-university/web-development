@@ -1,22 +1,23 @@
 <script setup>
 import 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js'
 import Cart from '../components/Cart.vue'
-import { onBeforeMount } from 'vue'
-import { useGlassesStore } from '../stores/glasses.js'
-import { ref } from 'vue'
+import { onBeforeMount, ref } from 'vue'
+import { useGlassesStore } from '../stores/cart'
+import { useRouter, useRoute } from 'vue-router';
+const route = useRoute()
 
 const items = ref([])
-const glassesStore = useGlassesStore()
+const cartStore = useGlassesStore()
 
-async function getGlassesUpdate(){
-    const result = await glassesStore.all()
+async function getCartItems(){
+    let idUser = route.fullPath.split("/cart/")
+    const result = await cartStore.userCart(idUser[1])
     if(result){
         items.value = result
     }
 }
 
-
-onBeforeMount(async() => getGlassesUpdate())
+onBeforeMount(async() => getCartItems(1))
 
 
 
