@@ -32,15 +32,21 @@ export const useUserStore = defineStore('User', () =>{
     }
     async function post(user) {
         try {
-            const res = await api.post("/users", {
-                username: user.username,
-                email: user.email,
-                password: user.password,
-                bornDate: user.bornDate
+            const { data, status }  = await api.post("/users", {
+                    username: user.username,
+                    email: user.email,
+                    password: user.password,
+                    bornDate: user.bornDate
             })
-              const { data } = res
-              return data
+            const response = data.data
+            console.log(user)
+            console.log(status)
+            if(status == 200){
+                return response
+            }
+
         } catch(error) {
+            console.log(error)
             const appError = getAppError(error)
             if(appError.name === "ValidationError") {
                 appError.message = "Não foi possível criar a sua conta"

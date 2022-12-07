@@ -68,7 +68,7 @@ export const useGlassesStore = defineStore('Glasses', ()=> {
             }
             return data.data
         } catch(error) {
-           return getAppError(error)
+            return getAppError(error)
         }
     }
      async function update(glasses, newCover){

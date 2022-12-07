@@ -63,9 +63,6 @@
       "inversedBy": "users",
       "configurable": false
     },
-    "bornDate": {
-      "type": "date"
-    },
     "country": {
       "type": "string"
     },
@@ -92,6 +89,9 @@
       "relation": "oneToOne",
       "target": "api::cart.cart",
       "mappedBy": "users_permissions_user"
+    },
+    "bornDate": {
+      "type": "string"
     }
   }
 }

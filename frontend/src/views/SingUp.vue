@@ -22,7 +22,8 @@ function validatePassword() {
   else msgPassword.value = ""
 }
 
-const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Novembro', 'Dezembro']
+const months = [{1:'Janeiro'}, {2:'Fevereiro'}, {3:'Março'}, {4:'Abril'}, {5:'Maio'}, {6:'Junho'},
+ {7:'Julho'}, {8:'Agosto'}, {9:'Setembro'}, {10:'Outubro'}, {11:'Novembro'}, {12:'Dezembro'}]
 const month = ref('')
 const day = ref('')
 const year = ref('')
@@ -35,7 +36,7 @@ const User = {
     bornDate: String
 }
 
-const user = ref<User>('')
+const user = ref(User)
 /*const user = ref({
   username:String,
   email:String,
@@ -45,28 +46,30 @@ const user = ref<User>('')
 
 // validar o ano
 
+const validationMessage = ref("")
+const router = useRouter()
 const userStore = useUserStore()
 
 async function registerUser(){
   user.value.username = name
   user.value.email = email
   user.value.password = password
-  user.value.bornDate = `${year}-${month}-${day}`
-  if(identifier.value && password.value){
-        const result = await userStore.post(user)
-        if(result){
-            validationMessage.value = ""
-            let redirect = "/"
-            /*if(store.isAdmin) {
-                redirect = route.query.redirect ? route.query.redirect: "/sunglasses"
-            }*/
-            router.push(redirect)
-        }
-        if(isApplicationError(result)) {
-            validationMessage.value = result.message
-        } else {
-            
-        }
+  user.value.bornDate = `${year.value + 1984}-${month.value + 1}-${day.value}`
+  if(user.value.username && user.value.password){
+        const result = await userStore.post(user.value)
+        //if(result){
+        //    validationMessage.value = ""
+        //    let redirect = "/"
+        //    /*if(store.isAdmin) {
+        //        redirect = route.query.redirect ? route.query.redirect: "/sunglasses"
+        //    }*/
+        //    router.push(redirect)
+        //}
+        //if(isApplicationError(result)) {
+        //    validationMessage.value = result.message
+        //} else {
+        //    
+        //}
     }
 }
 </script>
@@ -105,7 +108,7 @@ async function registerUser(){
       <div class="selects d-flex justify-content-between">
         <div class="form-floating">
           <select v-model="month" class="form-select" id="meses" required>
-            <option v-for="eachMonth in months" :value="eachMonth">{{eachMonth}}</option>
+            <option v-for="(value, key) in months" :value="key">{{ months[key][key+1] }}</option>
           </select>
           <label for="meses">Mês</label>
           <div class="invalid-feedback">
