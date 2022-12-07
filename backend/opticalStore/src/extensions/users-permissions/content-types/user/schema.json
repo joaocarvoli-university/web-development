@@ -84,14 +84,14 @@
     "userId": {
       "type": "uid"
     },
+    "bornDate": {
+      "type": "string"
+    },
     "cart": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::cart.cart",
-      "mappedBy": "users_permissions_user"
-    },
-    "bornDate": {
-      "type": "string"
+      "mappedBy": "userId"
     }
   }
 }

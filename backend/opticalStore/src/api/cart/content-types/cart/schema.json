@@ -15,23 +15,16 @@
     "cartId": {
       "type": "uid"
     },
-    "glasses": {
+    "glassesId": {
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::glasses.glasses"
     },
-    "users_permissions_user": {
+    "userId": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "cart"
-    },
-    "glassesId": {
-      "type": "uid",
-      "required": true
-    },
-    "userId": {
-      "type": "uid"
     }
   }
 }
