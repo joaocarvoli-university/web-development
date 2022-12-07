@@ -8,12 +8,11 @@ const items = ref([])
 const glassesStore = useGlassesStore()
 
 async function getGlassesUpdate(){
-    const result = await glassesStore.all("sunglasses")
+    const result = await glassesStore.all("prescriptionGlasses")
     if(result){
         items.value = result
     }
 }
-
 
 onBeforeMount(async() => getGlassesUpdate())
 
@@ -28,7 +27,7 @@ onBeforeMount(async() => getGlassesUpdate())
       <div class="row justify-content-center text-center">
         <div class="col-md-8 col-lg-6">
           <div class="header">
-            <h1>Óculos de sol</h1>
+            <h1>Óculos de grau</h1>
           </div>
         </div>
         <div class="row">

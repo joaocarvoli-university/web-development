@@ -1,20 +1,115 @@
 <script setup>
-import 'https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js'
-import 'https://code.jquery.com/jquery-3.6.0.js'
-import SingUpForms from '../components/Singup/SingUpForms.vue';
-import BornDate from '../components/Singup/BornDate.vue';
-import UserTerms from '../components/Singup/UserTerms.vue';
+import { ref } from 'vue'
+
+const name = ref('')
+const email = ref('')
+const password = ref('')
+const passwordValidation = ref('')
+const msgEmail = ref("")
+const msgPassword = ref("")
 
 
+function validateEmail() {
+  if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email.value)) msgEmail.value = "email inválido" 
+  else msgEmail.value = ""
+}
+
+function validatePassword() {
+  if (password != passwordValidation) msgPassword.value = "senha inválida"
+  else msgPassword.value = ""
+}
+
+const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Novembro', 'Dezembro']
+const month = ref('')
+const day = ref('')
+const year = ref('')
+
+/*function year () {
+  if (month.value === "02" && days.value === "29") {
+    for (let index = 1985; index <= 2022; index++) {
+      if (index % 4 == 0 && (index % 100 != 0 || index % 400 == 0)) {
+        years.options[years.options.length] = new Option(index, index);
+      }
+    }
+  } else {
+    for (let index = 1985; index <= 2022; index++) {
+      years.options[years.options.length] = new Option(index, index);
+    }
+  }
+}*/
+
+// validar o ano
 </script>
 
 <template>
-
   <div class="alignment">
     <div class="card card-login container" style="width: 26rem;">
-      <SingUpForms></SingUpForms>
-      <BornDate></BornDate>
-      <UserTerms></UserTerms>
+      <div class="d-flex">
+        <h4 class="flex-fill">Criar conta</h4>
+        <button class="btn btn-sm rounded inline-block"><router-link to="/">X</router-link></button>
+      </div>
+      <div class="form-floating mb-2 name">
+        <input type="text" v-model="name" class="form-control" id="floatingInput" placeholder="name" required>
+        <label for="floatingInput"><strong>Nome:</strong></label>
+      </div>
+      <div class="form-floating mb-2">
+        <input type="email" v-model="email" class="form-control" id="Email" placeholder="name@example.com" required
+          @change="validateEmail">
+        <label for="Email"><strong>Email:</strong></label>
+        <div v-if="msgEmail.length > 0">
+          {{ msgEmail }}
+        </div>
+      </div>
+      <div class="form-floating mb-2">
+        <input type="password" v-model="password" class="form-control" id="senha" placeholder="Password" minlength="6"
+          required>
+        <label for="floatingInput"><strong>Senha:</strong></label>
+      </div>
+      <div class="form-floating mb-2">
+        <input @change="validatePassword" type="password" v-model="passwordValidation" class="form-control" id="confirmPassword" placeholder="Password" minlength="6" required>
+        <label for="floatingPassword"><strong>Confirmação da senha:</strong></label>
+        <div v-if="msgPassword.length > 0">
+          {{ msgPassword }}
+        </div>
+      </div>
+      <div class="selects d-flex justify-content-between">
+        <div class="form-floating">
+          <select class="form-select" id="meses" required>
+            <option selected v-model="month"></option>
+            <option v-for="eachMonth in months">{{eachMonth}}</option>
+          </select>
+          <label for="meses">Mês</label>
+          <div class="invalid-feedback">
+            Campo obrigatório.
+          </div>
+        </div>
+        <div class="form-floating">
+          <select class="form-select" id="dias" required>
+            <option selected></option>
+            <option v-for="eachDay in 32">{{eachDay}}</option>
+          </select>
+          <label for="dias">Dia</label>
+        </div>
+        <div class="form-floating">
+          <select class="form-select years" id="SelectYears" required>
+            <option selected></option>
+            <option v-for="eachDay in 39">{{eachDay + 1984}}</option>
+          </select>
+          <label for="SelectYear">Ano</label>
+          
+        </div>
+      </div>
+      <div class="d-flex">
+        <h6>Receba e-mails sobre sua atividade no Tzeet e recomendações.</h6>
+        <input type="checkbox" id="confirm">
+      </div>
+      <div>
+        <h6>Você concorda com nossos Termos, com a Política de privacidade e com o Uso de Cookies?</h6>
+        <input type="radio" name="concordar" id="sim">
+        <label for="sim">Sim</label>
+        <input type="radio" name="concordar" id="nao">
+        <label for="nao">Não</label>
+      </div>
       <div class="register">
         <button type="submit" class="btn btn-danger btn-sm mb-2" id="btn-submitForm">Se inscrever</button>
       </div>
@@ -23,21 +118,23 @@ import UserTerms from '../components/Singup/UserTerms.vue';
 </template>
 
 <style>
+.form-floating {
+  width: 100%;
+}
+
 .alignment {
   display: flex;
   align-items: center;
   height: 100%;
-  background-color: rgb(80, 80, 80);
 }
 
-.form-cadastro {
+.form-floating {
   font-size: small;
 }
 
-.form-cadastro button {
+.form-floating button {
   border-radius: 15px;
   margin-top: 20px;
-  width: 24rem;
 }
 
 .selects {
@@ -47,10 +144,6 @@ import UserTerms from '../components/Singup/UserTerms.vue';
 
 .register {
   border-top: 1 solid;
-}
-
-.alignment {
-  background-color: aliceblue;
 }
 
 #comment {

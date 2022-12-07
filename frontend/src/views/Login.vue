@@ -73,7 +73,7 @@ async function authenticate(event){
                 </div>
                 <div class="d-flex row">
                     <a class="mb-4" href="#">Esqueceu a senha?</a>
-                    <button type="submit" class="btn btn-doLogindanger btn-sm mb-2"
+                    <button type="submit" class="btn btn-danger btn-sm mb-2"
                         id="btn-submitForm" @click="authenticate">Entrar</button>
                     <h6>Não tem uma conta? <router-link to="/SingUp">Inscreva-se</router-link></h6>
                 </div>

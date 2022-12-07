@@ -14,9 +14,9 @@ export const Glasses = {
 
 
 export const useGlassesStore = defineStore('Glasses', ()=> {
-    async function all(){
+    async function all(glassesType){
         try {
-            const { data, status } = await api.get("/many-glasses")
+            const { data, status } = await api.get(`/many-glasses?filters[type][$eq]=${glassesType}`)
             const response = data.data
             if(status == 200){
                 return response

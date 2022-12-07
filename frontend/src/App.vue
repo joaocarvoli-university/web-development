@@ -27,7 +27,7 @@
                 <router-link class="nav-link active" aria-current="page" to="/sunglasses">Óculos de sol</router-link>
             </li>
             <li class="items nav-item">
-              <router-link class="nav-link active" to="/sunglasses">Óculos de grau</router-link>
+              <router-link class="nav-link active" to="/prescriptionGlasses">Óculos de grau</router-link>
             </li>
             <li><hr class="dropdown-divider"></li>
             <li class="items nav-item">
