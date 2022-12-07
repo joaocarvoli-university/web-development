@@ -17,7 +17,7 @@ async function getCartItems(){
     }
 }
 
-onBeforeMount(async() => getCartItems(1))
+onBeforeMount(async() => getCartItems())
 
 
 
@@ -33,13 +33,19 @@ onBeforeMount(async() => getCartItems(1))
           </div>
         </div>
         <div class="row">
-        <Cart v-for="item in items" :key="item.id"
+            <ul v-for="item in items">
+                <li>{{item}}</li>
+            </ul>
+<!--
+            <Cart v-for="item in items" :key="item.id"
         :id="item.id"
         :name="item.attributes.name"
         :price="item.attributes.price"
         :description="item.attributes.description"
         >
         </Cart>
+-->
+        
         </div>
       </div>
     </div>

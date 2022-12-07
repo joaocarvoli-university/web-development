@@ -6,6 +6,9 @@ defineProps({
   price: Number,
   description: String
 })
+
+
+
 </script>
 
 <template>
@@ -14,7 +17,6 @@ defineProps({
       <div class="part-1 rounded">
         <ul>
           <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
-          <li><a href="#"><i class="fas fa-heart"></i></a></li>
         </ul>
       </div>
       <div class="part-2">
