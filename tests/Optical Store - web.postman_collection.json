@@ -319,22 +319,24 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/carts?populate=*&filters[userId][$eq]=",
+							"raw": "http://localhost:1337/api/carts?filters[userId][id][$eq]=5&populate=*",
+							"protocol": "http",
 							"host": [
-								"{{BASE_URL}}"
+								"localhost"
 							],
+							"port": "1337",
 							"path": [
 								"api",
 								"carts"
 							],
 							"query": [
 								{
-									"key": "populate",
-									"value": "*"
+									"key": "filters[userId][id][$eq]",
+									"value": "5"
 								},
 								{
-									"key": "filters[userId][$eq]",
-									"value": ""
+									"key": "populate",
+									"value": "*"
 								}
 							]
 						}
