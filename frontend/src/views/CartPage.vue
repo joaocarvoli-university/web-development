@@ -37,7 +37,7 @@ onBeforeMount(async() => getCartItems())
           </div>
         </div>
         <div class="row">
-            <ul v-for="item in items">
+            <ul v-for="item in items" >
                 <li>{{item}}</li>
             </ul>
     

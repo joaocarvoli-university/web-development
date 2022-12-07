@@ -5,6 +5,9 @@ import { useUserStore } from '../stores/user';
 import { isApplicationError } from '../mixing/errorMessageMixing'
 
 const name = ref('')
+const city = ref('')
+const lastName = ref('')
+const phone = ref('')
 const email = ref('')
 const password = ref('')
 const passwordValidation = ref('')
@@ -33,22 +36,20 @@ const User = {
     email: String,
     password:String,
     username: String,
-    bornDate: String
+    lastname: String,
+    bornDate: String,
+    city: String,
+    phone: String,
 }
 
 const user = ref(User)
-/*const user = ref({
-  username:String,
-  email:String,
-  password: String,
-  bornDate:`${year}-${month}-${day}`,
-})*/
 
 // validar o ano
 
 const validationMessage = ref("")
 const router = useRouter()
 const userStore = useUserStore()
+
 
 async function registerUser(){
   user.value.username = name
@@ -57,19 +58,11 @@ async function registerUser(){
   user.value.bornDate = `${year.value + 1984}-${month.value + 1}-${day.value}`
   if(user.value.username && user.value.password){
         const result = await userStore.post(user.value)
-        //if(result){
-        //    validationMessage.value = ""
-        //    let redirect = "/"
-        //    /*if(store.isAdmin) {
-        //        redirect = route.query.redirect ? route.query.redirect: "/sunglasses"
-        //    }*/
-        //    router.push(redirect)
-        //}
-        //if(isApplicationError(result)) {
-        //    validationMessage.value = result.message
-        //} else {
-        //    
-        //}
+    if (result) {
+      validationMessage.value = ""
+      let redirect = "/"
+      router.push(redirect)
+     }
     }
 }
 </script>
@@ -82,8 +75,22 @@ async function registerUser(){
         <button class="btn btn-sm rounded inline-block"><router-link to="/">X</router-link></button>
       </div>
       <div class="form-floating mb-2 name">
-        <input type="text" v-model="name" class="form-control" id="floatingInput" placeholder="name" required>
+        <input type="text" v-model="name" class="form-control" id="floatingInput" placeholder="nome" required>
         <label for="floatingInput"><strong>Nome:</strong></label>
+      </div>
+      <div class="form-floating mb-2 name">
+        <input type="text" v-model="lastName" class="form-control" id="floatingInput" placeholder="sobrenome" required>
+        <label for="floatingInput"><strong>sobrenome:</strong></label>
+      </div>
+       <div class="form-floating mb-2">
+        <input type="text" v-model="city" class="form-control" id="city" placeholder="cidade" 
+          required>
+        <label for="floatingInput"><strong>cidade:</strong></label>
+      </div>
+      <div class="form-floating mb-2">
+        <input type="text" v-model="phone" class="form-control" id="phone" placeholder="celular" minlength="6"
+          required>
+        <label for="floatingInput"><strong>telefone:</strong></label>
       </div>
       <div class="form-floating mb-2">
         <input type="email" v-model="email" class="form-control" id="Email" placeholder="name@example.com" required
