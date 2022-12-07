@@ -67,33 +67,6 @@
 					"response": []
 				},
 				{
-					"name": "Register a user",
-					"request": {
-						"method": "POST",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n \"email\": \"jvcarvoli3@gmail.com\",\n \"username\": \"João Victor\",\n \"password\": \"123456\"   \n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{BASE_URL}}/api/users",
-							"host": [
-								"{{BASE_URL}}"
-							],
-							"path": [
-								"api",
-								"users"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "Update a user",
 					"request": {
 						"method": "PUT",
@@ -156,7 +129,7 @@
 			"name": "Glasses",
 			"item": [
 				{
-					"name": "Find many glasses",
+					"name": "Find prescription glasses",
 					"request": {
 						"auth": {
 							"type": "noauth"
@@ -164,13 +137,46 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{BASE_URL}}/api/many-glasses",
+							"raw": "{{BASE_URL}}/api/many-glasses?filters[type][$eq]=prescriptionGlasses",
 							"host": [
 								"{{BASE_URL}}"
 							],
 							"path": [
 								"api",
 								"many-glasses"
+							],
+							"query": [
+								{
+									"key": "filters[type][$eq]",
+									"value": "prescriptionGlasses"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Find sunglasses",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/many-glasses?filters[type][$eq]=sunglasses",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"many-glasses"
+							],
+							"query": [
+								{
+									"key": "filters[type][$eq]",
+									"value": "sunglasses"
+								}
 							]
 						}
 					},
@@ -313,7 +319,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{BASE_URL}}/api/carts?id=2",
+							"raw": "{{BASE_URL}}/api/carts?populate=*&filters[userId][$eq]=",
 							"host": [
 								"{{BASE_URL}}"
 							],
@@ -323,8 +329,12 @@
 							],
 							"query": [
 								{
-									"key": "id",
-									"value": "2"
+									"key": "populate",
+									"value": "*"
+								},
+								{
+									"key": "filters[userId][$eq]",
+									"value": ""
 								}
 							]
 						}
@@ -348,7 +358,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"cartId\":\" \",\n    \"glassesId\": \" \",\n    \"userId\": \" \"\n}",
+							"raw": "{\n    \"data\":{\n        \"glassesId\": \"1\",\n        \"userId\": \"1\"\n    }\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -409,6 +419,65 @@
 								"api",
 								"auth",
 								"local"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "SinUp",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n \"username\": \"João Victoasdasdas\",\n \"email\": \"jvcarvolasdasdi@gmail.com\",\n \"password\": \"123456\",\n \"bornDate\":\"1976-5-4\"   \n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/users",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Roles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{ACESS_TOKEN}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/users/me",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"me"
 							]
 						}
 					},
