@@ -5,16 +5,15 @@ import { getAppError } from '../mixing/errorMessageMixing'
 
 
 export const User = {
-    id: String,
+    id: Number,
     email: String,
     password:String,
-    username: String
+    username: String,
+    bornDate: String
 }
 
 
 export const useUserStore = defineStore('User', () =>{
-    const user = ref<User>({})
-
     async function authenticate(identifier, password) {
         try {
             const res = await api.post("/auth/local", {
@@ -31,5 +30,23 @@ export const useUserStore = defineStore('User', () =>{
             return appError
         }
     }
-    return {User, authenticate}
+    async function post(user) {
+        try {
+            const res = await api.post("/users", {
+                username: user.username,
+                email: user.email,
+                password: user.password,
+                bornDate: user.bornDate
+            })
+              const { data } = res
+              return data
+        } catch(error) {
+            const appError = getAppError(error)
+            if(appError.name === "ValidationError") {
+                appError.message = "Não foi possível criar a sua conta"
+            }
+            return appError
+        }
+    }
+    return {User, authenticate, post}
 })

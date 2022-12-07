@@ -11,8 +11,6 @@ const identifier = ref("")
 const password = ref("")
 const router = useRouter()
 const route = useRoute()
-
-const validated = ref(false)
 const validationMessage = ref("")
 
 let msg = ref("")
@@ -28,7 +26,6 @@ function validateEmail(){
 async function authenticate(event){
     event.preventDefault()
     event.stopPropagation()
-    validated.value = true
     if(identifier.value && password.value) {
         const result = await userStore.authenticate(identifier.value, password.value)
         if(result){

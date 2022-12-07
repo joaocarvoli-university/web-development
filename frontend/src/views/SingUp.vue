@@ -1,5 +1,8 @@
 <script setup>
 import { ref } from 'vue'
+import { useRouter, useRoute } from 'vue-router';
+import { useUserStore } from '../stores/user';
+import { isApplicationError } from '../mixing/errorMessageMixing'
 
 const name = ref('')
 const email = ref('')
@@ -23,22 +26,49 @@ const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Jul
 const month = ref('')
 const day = ref('')
 const year = ref('')
+const licenseTerms = ref(null)
 
-/*function year () {
-  if (month.value === "02" && days.value === "29") {
-    for (let index = 1985; index <= 2022; index++) {
-      if (index % 4 == 0 && (index % 100 != 0 || index % 400 == 0)) {
-        years.options[years.options.length] = new Option(index, index);
-      }
-    }
-  } else {
-    for (let index = 1985; index <= 2022; index++) {
-      years.options[years.options.length] = new Option(index, index);
-    }
-  }
-}*/
+const User = {
+    email: String,
+    password:String,
+    username: String,
+    bornDate: String
+}
+
+const user = ref<User>('')
+/*const user = ref({
+  username:String,
+  email:String,
+  password: String,
+  bornDate:`${year}-${month}-${day}`,
+})*/
 
 // validar o ano
+
+const userStore = useUserStore()
+
+async function registerUser(){
+  user.value.username = name
+  user.value.email = email
+  user.value.password = password
+  user.value.bornDate = `${year}-${month}-${day}`
+  if(identifier.value && password.value){
+        const result = await userStore.post(user)
+        if(result){
+            validationMessage.value = ""
+            let redirect = "/"
+            /*if(store.isAdmin) {
+                redirect = route.query.redirect ? route.query.redirect: "/sunglasses"
+            }*/
+            router.push(redirect)
+        }
+        if(isApplicationError(result)) {
+            validationMessage.value = result.message
+        } else {
+            
+        }
+    }
+}
 </script>
 
 <template>
@@ -74,9 +104,8 @@ const year = ref('')
       </div>
       <div class="selects d-flex justify-content-between">
         <div class="form-floating">
-          <select class="form-select" id="meses" required>
-            <option selected v-model="month"></option>
-            <option v-for="eachMonth in months">{{eachMonth}}</option>
+          <select v-model="month" class="form-select" id="meses" required>
+            <option v-for="eachMonth in months" :value="eachMonth">{{eachMonth}}</option>
           </select>
           <label for="meses">Mês</label>
           <div class="invalid-feedback">
@@ -84,34 +113,30 @@ const year = ref('')
           </div>
         </div>
         <div class="form-floating">
-          <select class="form-select" id="dias" required>
+          <select class="form-select" v-model="day" id="dias" required>
             <option selected></option>
-            <option v-for="eachDay in 32">{{eachDay}}</option>
+            <option v-for="eachDay in 32" :value="eachDay" >{{eachDay}}</option>
           </select>
           <label for="dias">Dia</label>
         </div>
         <div class="form-floating">
-          <select class="form-select years" id="SelectYears" required>
+          <select class="form-select years" v-model="year" id="SelectYears" required>
             <option selected></option>
-            <option v-for="eachDay in 39">{{eachDay + 1984}}</option>
+            <option v-for="eachDay in 39" :value="eachDay">{{eachDay + 1984}}</option>
           </select>
           <label for="SelectYear">Ano</label>
           
         </div>
       </div>
-      <div class="d-flex">
-        <h6>Receba e-mails sobre sua atividade no Tzeet e recomendações.</h6>
-        <input type="checkbox" id="confirm">
-      </div>
       <div>
         <h6>Você concorda com nossos Termos, com a Política de privacidade e com o Uso de Cookies?</h6>
-        <input type="radio" name="concordar" id="sim">
+        <input type="radio" name="concordar" id="sim" v-model="licenseTerms">
         <label for="sim">Sim</label>
         <input type="radio" name="concordar" id="nao">
         <label for="nao">Não</label>
       </div>
       <div class="register">
-        <button type="submit" class="btn btn-danger btn-sm mb-2" id="btn-submitForm">Se inscrever</button>
+        <button type="submit" class="btn btn-danger btn-sm mb-2" id="btn-submitForm" @click="registerUser">Se inscrever</button>
       </div>
     </div>
   </div>
