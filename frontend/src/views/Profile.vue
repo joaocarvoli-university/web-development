@@ -4,7 +4,22 @@ import PhoneForms from '../components/Profile/PhoneForms.vue';
 import EmailForms from '../components/Profile/EmailForms.vue';
 import Location from '../components/Profile/Location.vue';
 import Password from '../components/Profile/Password.vue';
+import { onBeforeMount, ref } from 'vue'
+import { useUserStore } from '../stores/user'
+import { useRouter, useRoute } from 'vue-router';
+const route = useRoute()
 
+const items = ref([])
+const userStore = useUserStore()
+
+async function getUser(){
+    let idUser = route.fullPath.split("/users/")
+    const result = await userStore.getByUserId(idUser[0])
+    if(result){
+        items.value = result
+    }
+}
+onBeforeMount(async() => getUser())
 </script>
 
 <template>
@@ -18,7 +33,7 @@ import Password from '../components/Profile/Password.vue';
           <div class="tab-pane active" id="home">
             <hr/>
             <form class="form" action="##" method="post" id="registrationForm">
-              <NameForms></NameForms>
+              <NameForms> </NameForms>
               <PhoneForms></PhoneForms>
               <EmailForms></EmailForms>
               <Location></Location>

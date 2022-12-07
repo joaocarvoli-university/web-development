@@ -6,13 +6,12 @@ import { defineStore } from 'pinia'
 export const useGlassesStore = defineStore('Car', () => {
     async function getByUserId(userId) {
         try {
-            const { data, status } = await api .get(`/carts?filters[userId][id][$eq]=${userId}&populate=*`)
+            const { data, status } = await api.get(`/carts?filters[userId][id][$eq]=${userId}&populate=*`)
             const response = data.data
             if (status == 200) {
                 return response
             }
-        }
-        catch (error) {
+        } catch (error) {
             console.log(error)
             return error
         }
@@ -25,13 +24,12 @@ export const useGlassesStore = defineStore('Car', () => {
             if (status == 200) {
                 return response
             }
-        }
-        catch (error) {
+        } catch (error) {
             console.log(error)
             return error
         }
     }
-    
+
     /*async function remove() {
         try {
             const { data } = await api.delete(`/cart/`,{params : {id: id}}, {
