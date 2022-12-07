@@ -13,7 +13,7 @@ defineProps({
     <div id="product-1" class="single-product">
       <div class="part-1 rounded">
         <ul>
-          <li><a href="#" @click=""><i class="fas fa-solid fa-trash"></i></a></li>
+          <li><a href="#"><i class="fas fa-solid fa-trash"></i></a></li>
         </ul>
       </div>
       <div class="part-2">

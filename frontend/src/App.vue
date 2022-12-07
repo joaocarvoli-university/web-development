@@ -19,7 +19,7 @@
           <router-link class="nav-link active" to="/cart">Carrinho</router-link>
         </li>
         <li class="nav-item dropdown ">
-          <a class="nav-link dropdown-toggle active" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
             Produtos
           </a>
           <ul class="dropdown-menu">

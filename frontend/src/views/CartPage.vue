@@ -1,5 +1,4 @@
 <script setup>
-import 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js'
 import Cart from '../components/Cart.vue'
 import { onBeforeMount, ref } from 'vue'
 import { useGlassesStore } from '../stores/cart'
@@ -11,7 +10,7 @@ const cartStore = useGlassesStore()
 
 async function getCartItems(){
     let idUser = route.fullPath.split("/cart/")
-    const result = await cartStore.userCart(idUser[1])
+    const result = await cartStore.getByUserId(idUser[1])
     if(result){
         items.value = result
     }
@@ -19,8 +18,13 @@ async function getCartItems(){
 
 onBeforeMount(async() => getCartItems())
 
-
-
+/*<Cart v-for="item in items" :key="item.id"
+            :id="item.id"
+            :name="item.attributes.name"
+            :price="item.attributes.price"
+            :description="item.attributes.description">
+            </Cart> 
+*/
 </script>
 
 <template>
@@ -36,16 +40,7 @@ onBeforeMount(async() => getCartItems())
             <ul v-for="item in items">
                 <li>{{item}}</li>
             </ul>
-<!--
-            <Cart v-for="item in items" :key="item.id"
-        :id="item.id"
-        :name="item.attributes.name"
-        :price="item.attributes.price"
-        :description="item.attributes.description"
-        >
-        </Cart>
--->
-        
+    
         </div>
       </div>
     </div>

@@ -30,6 +30,19 @@ export const useUserStore = defineStore('User', () =>{
             return appError
         }
     }
+     async function getByUserId(userId) {
+        try {
+            const { data, status } = await api .get(`/users?filters[id][$eq]=${userId}`)
+            const response = data.data
+            if (status == 200) {
+                return response
+            }
+        }
+        catch (error) {
+            console.log(error)
+            return error
+        }
+    }
     async function post(user) {
         try {
             const { data, status }  = await api.post("/users", {

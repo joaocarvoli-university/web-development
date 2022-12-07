@@ -1,5 +1,4 @@
 <script setup>
-import 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js'
 import { ref } from 'vue'
 import { useRouter, useRoute } from 'vue-router';
 import { useUserStore } from '../stores/user';

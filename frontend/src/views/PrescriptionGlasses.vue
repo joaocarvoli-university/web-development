@@ -1,5 +1,4 @@
 <script setup>
-import 'https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js'
 import Card from '../components/Glasses/Card.vue'
 import { onBeforeMount } from 'vue'
 import { useGlassesStore } from '../stores/glasses.js'
