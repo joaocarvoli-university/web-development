@@ -7,6 +7,9 @@ import SunGlasses from '../views/SunGlasses.vue'
 import PrescriptionGlasses from '../views/PrescriptionGlasses.vue'
 import Cart from '../views/CartPage.vue'
 import AboutUs from "../views/Aboutus.vue"
+import Page403 from '../views/Page403.vue'
+import Page404 from '../views/Page404.vue'
+
 const routes = [
   {
     path: "/",
@@ -47,6 +50,14 @@ const routes = [
     path: "/aboutus",
     component: AboutUs,
     nome: 'aboutus'
+  },
+  {
+    path: '/forbiden',
+    component: Page403,
+  },
+  {
+    path: '/notfound',
+    component: Page404,
   }
 ]
 
