@@ -1,5 +1,7 @@
 <script setup>
 
+import { ref } from 'vue'
+
 defineProps({
   id: Number,
   name: String,
@@ -7,6 +9,11 @@ defineProps({
   description: String
 })
 
+const change = ref(true)
+
+function addInCart(){
+  change.value = true
+}
 
 
 </script>
@@ -16,7 +23,7 @@ defineProps({
     <div id="product-1" class="single-product">
       <div class="part-1 rounded">
         <ul>
-          <li><a href="#"><i class="fas fa-shopping-cart"></i></a></li>
+          <li><a href="#"><i class="fas fa-shopping-cart" @click="addInCart"></i></a></li>
         </ul>
       </div>
       <div class="part-2">

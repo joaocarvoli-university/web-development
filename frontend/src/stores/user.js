@@ -45,8 +45,6 @@ export const useUserStore = defineStore('User', () => {
         try {
             const { data, status } = await api.post("/users", user)
             const response = data.data
-            console.log(user)
-            console.log(status)
             if (status == 200) {
                 return response
             }
