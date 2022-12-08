@@ -11,8 +11,18 @@ export const User = {
     bornDate: String
 }
 
+export const UserLogin = {
+    jwt: String,
+    id: Number,
+    username: String,
+    email: String,
+    role: String
+}
+
 
 export const useUserStore = defineStore('User', () => {
+    const user = ref(UserLogin)
+
     async function authenticate(identifier, password) {
         try {
             const res = await api.post("/auth/local", {
@@ -20,13 +30,18 @@ export const useUserStore = defineStore('User', () => {
                 password
             })
             const { data } = res
-            return data
-        } catch (error) {
-            const appError = getAppError(error)
-            if (appError.name === "ValidationError") {
-                appError.message = "Usuário ou senha incorretos!"
+            user.value = {
+                jwt: data.jwt,
+                id: data.user.id,
+                username: data.user.username,
+                email: data.user.email,
+                role: ""
             }
-            return appError
+            const userRole = await getRole(user)
+            user.value.role = userRole
+            return user.value
+        } catch (error) {
+            return getAppError(error)
         }
     }
     async function getByUserId(userId) {
@@ -46,18 +61,18 @@ export const useUserStore = defineStore('User', () => {
             const { data, status } = await api.post("/users", user)
             const response = data.data
             if (status == 200) {
-                return response
+                return response.role.name
             }
 
         } catch (error) {
             const appError = getAppError(error)
             if (appError.name === "ValidationError") {
-                appError.message = "Não foi possível criar a sua conta"
+                appError.message = "Nao foi possivel criar a sua conta"
             }
             return appError
         }
     }
-       async function put(user, userId) {
+    async function put(user, userId) {
         try {
             const { data, status } = await api.put(`/users/${userId}`, user)
             const response = data.data
@@ -68,10 +83,25 @@ export const useUserStore = defineStore('User', () => {
         } catch (error) {
             const appError = getAppError(error)
             if (appError.name === "ValidationError") {
-                appError.message = "Não foi possível criar a sua conta"
+                appError.message = "Nao foi possivel atualizar seus dados"
             }
             return appError
         }
     }
-    return { User, authenticate, post, getByUserId,put }
+
+    async function getRole(user) {
+        try {
+            const res = await api.get("/users/me?populate=role", {
+                headers: {
+                    Authorization: `Bearer ${user.value.jwt}`
+                },
+            })
+            const { data } = res
+            return data.role.name
+        } catch (error) {
+            return getAppError(error)
+        }
+
+    }
+    return { User, authenticate, post, getByUserId, put, getRole }
 })

@@ -12,9 +12,8 @@ defineProps({
 const change = ref(true)
 
 function addInCart(){
-  change.value = true
+  change.value = !change.value
 }
-
 
 </script>
 
@@ -23,11 +22,11 @@ function addInCart(){
     <div id="product-1" class="single-product">
       <div class="part-1 rounded">
         <ul>
-          <li><a href="#"><i class="fas fa-shopping-cart" @click="addInCart"></i></a></li>
+          <li><a href="#" @click="addInCart"><i class="fas fa-shopping-cart"></i>oi</a></li>
         </ul>
       </div>
-      <div class="part-2">
-        <h3 class="product-title">{{name}}</h3>
+      <div class="part-2" >
+        <h3 class="product-title" >{{name}}</h3>
         <h4 class="product-price">Price: {{price}}</h4>
       </div>
     </div>
