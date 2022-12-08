@@ -50,7 +50,6 @@ export const useUserStore = defineStore('User', () => {
             }
 
         } catch (error) {
-            console.log(error)
             const appError = getAppError(error)
             if (appError.name === "ValidationError") {
                 appError.message = "Não foi possível criar a sua conta"
@@ -58,5 +57,21 @@ export const useUserStore = defineStore('User', () => {
             return appError
         }
     }
-    return { User, authenticate, post, getByUserId }
+       async function put(user, userId) {
+        try {
+            const { data, status } = await api.put(`/users/${userId}`, user)
+            const response = data.data
+            if (status == 200) {
+                return response
+            }
+
+        } catch (error) {
+            const appError = getAppError(error)
+            if (appError.name === "ValidationError") {
+                appError.message = "Não foi possível criar a sua conta"
+            }
+            return appError
+        }
+    }
+    return { User, authenticate, post, getByUserId,put }
 })

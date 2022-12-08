@@ -52,18 +52,20 @@ const userStore = useUserStore()
 
 
 async function registerUser(){
-  user.value.username = name
-  user.value.email = email
-  user.value.password = password
+  user.value.username = name.value + " " + lastName.value
+  user.value.email = email.value
+  user.value.password = password.value
+  user.value.city = city.value
+  user.value.phone = phone.value
   user.value.bornDate = `${year.value + 1984}-${month.value + 1}-${day.value}`
-  if(user.value.username && user.value.password){
+  if(user.value.username && user.value.password && user.value.email){
         const result = await userStore.post(user.value)
     if (result) {
       validationMessage.value = ""
       let redirect = "/"
       router.push(redirect)
      }
-    }
+  }
 }
 </script>
 

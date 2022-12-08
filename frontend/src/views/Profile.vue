@@ -6,20 +6,36 @@ import Location from '../components/Profile/Location.vue';
 import Password from '../components/Profile/Password.vue';
 import { onBeforeMount, ref } from 'vue'
 import { useUserStore } from '../stores/user'
-import { useRouter, useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 const route = useRoute()
-
-const items = ref([])
+const router = useRouter()
 const userStore = useUserStore()
+const name = ref('')
+const phone = ref('')
+const city = ref('')
+const email = ref('')
+const password = ref('')
 
-async function getUser(){
-    let idUser = route.fullPath.split("/users/")
-    const result = await userStore.getByUserId(idUser[0])
-    if(result){
-        items.value = result
+function handleName(s) { name.value = s }
+function handlePhone(s) { phone.value = s }
+function handleCity(s) { city.value = s }
+function handleEmail(s) { email.value = s }
+function handlePassword(s) { password.value = s }
+
+async function updateUser() {
+    if(name.value.length > 0) user.value.username = name.value
+    if(email.value.length > 0) user.value.email = email.value
+    if(phone.value.length > 0) user.value.phone = phone.value
+    if(city.value.length > 0) user.value.city = city.value
+    if(password.value.length > 0) user.value.password = password.value
+    let idUser = route.fullPath.split("/profile/")
+    const result = await userStore.put(idUser[1])
+    if (result) {
+      validationMessage.value = ""
+      let redirect = `/profile/${idUser[1]}`
+      router.push(redirect)
     }
 }
-onBeforeMount(async() => getUser())
 </script>
 
 <template>
@@ -33,17 +49,24 @@ onBeforeMount(async() => getUser())
           <div class="tab-pane active" id="home">
             <hr/>
             <form class="form" action="##" method="post" id="registrationForm">
-              <NameForms> </NameForms>
-              <PhoneForms></PhoneForms>
-              <EmailForms></EmailForms>
-              <Location></Location>
-              <Password></Password>
-              <div class="form-group">
+              <NameForms @custom-change="handleName"> </NameForms>
+              <p hidden>{{name}}</p>
+              <PhoneForms @custom-change="handlePhone"></PhoneForms>
+              <p hidden>{{phone}}</p>
+              <EmailForms @custom-change="handleEmail"></EmailForms>
+              <p hidden>{{city}}</p>
+              <Location @custom-change="handleCity"></Location>
+              <p hidden>{{email}}</p>
+              <Password @custom-change="handlePassword"></Password>
+              <p hidden>{{password}}</p>
+              <div class="form-grobtn-successup">
                 <div class="col-xs-12">
                   <br />
-                  <button class="btn btn-sm btn-success" type="submit">
-                    <i class="glyphicon glyphicon-ok-sign"></i> Save
-                  </button>
+                  <router-link to='/'>
+                    <button class="btn btn-sm btn-success" type="submit" @click="updateUser">
+                    <i class="glyphicon glyphicon-ok-sign">Save</i> 
+                    </button>
+                  </router-link>
                   <button class="btn btn-sm" type="reset">
                     <i class="glyphicon glyphicon-repeat"></i> Reset
                   </button>
