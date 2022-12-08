@@ -24,7 +24,7 @@ export const useGlassesStore = defineStore("Car", () => {
     }
   }
 
-  async function post(idGlasses, idUser) {
+  async function post(idGlasses, idUser, token) {
     try {
       const { data, status } = await api.post(
         `/carts`,
@@ -32,6 +32,11 @@ export const useGlassesStore = defineStore("Car", () => {
           data: {
             glassesId: idGlasses,
             userId: idUser,
+          },
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
           },
         }
       );

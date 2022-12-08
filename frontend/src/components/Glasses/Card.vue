@@ -1,20 +1,31 @@
 <script setup>
 
 import { ref } from 'vue'
+import { useGlassesStore } from '../../stores/cart.js'
+import { useRoute, useRouter } from 'vue-router';
 
-defineProps({
+const route = useRoute()
+const useGlasses = useGlassesStore()
+
+const props = defineProps({
   id: Number,
   name: String,
   price: Number,
   description: String
 })
 
-const change = ref(true)
 
-function addInCart(){
-  change.value = !change.value
+async function addInCart(){
+  try {
+    let idUser = route.fullPath.split("/")
+    const {data, status} = await useGlasses.post(props.id, idUser[2], "")
+    if (status == 200) {
+      alert("Produto adicionado com sucesso")
+    }
+  } catch (err) {
+      console.log(err)
+  }
 }
-
 </script>
 
 <template>
@@ -22,7 +33,9 @@ function addInCart(){
     <div id="product-1" class="single-product">
       <div class="part-1 rounded">
         <ul>
-          <li><a href="#" @click="addInCart"><i class="fas fa-shopping-cart"></i>oi</a></li>
+          <li>
+            <a @click="addInCart"><i class="fas fa-shopping-cart"></i></a>
+          </li>
         </ul>
       </div>
       <div class="part-2" >

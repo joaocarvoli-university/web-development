@@ -36,8 +36,7 @@ onBeforeMount(async() => getGlassesUpdate())
         :id="item.id"
         :name="item.attributes.name"
         :price="item.attributes.price"
-        :description="item.attributes.description"
-        >
+        :description="item.attributes.description">
         </Card>
         </div>
       </div>
