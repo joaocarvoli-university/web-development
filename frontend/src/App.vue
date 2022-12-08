@@ -31,7 +31,7 @@
             </li>
             <li><hr class="dropdown-divider"></li>
             <li class="items nav-item">
-              <router-link class="nav-link active" to="/sunglasses">Sobre nós</router-link>
+              <router-link class="nav-link active" to="/aboutus">Sobre nós</router-link>
             </li>
           </ul>
         </li>
