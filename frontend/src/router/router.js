@@ -22,7 +22,7 @@ const routes = [
     nome: 'login'
   },
   {
-    path: "/profile/:id",
+    path: "/profile",
     component: Profile,
     nome: 'profile'
   },
@@ -42,7 +42,7 @@ const routes = [
     nome: 'prescriptionGlasses'
   },
   {
-    path: "/cart/:id",
+    path: "/cart",
     component: Cart,
     nome: 'cart'
   },

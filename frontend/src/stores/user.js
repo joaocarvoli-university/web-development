@@ -2,6 +2,7 @@ import { api } from '../baseConfig'
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { getAppError } from '../mixing/errorMessageMixing'
+import Cookies from 'js-cookie'
 
 
 export const User = {
@@ -20,6 +21,8 @@ export const useUserStore = defineStore('User', () => {
                 password
             })
             const { data } = res
+            Cookies.set('token', data.jwt)
+            Cookies.set('idUser', data.user.id)
             return data
         } catch (error) {
             const appError = getAppError(error)
@@ -29,9 +32,9 @@ export const useUserStore = defineStore('User', () => {
             return appError
         }
     }
-    async function getByUserId(userId) {
+    async function getByUserId() {
         try {
-            const { data, status } = await api.get(`/users/${userId}`)
+            const { data, status } = await api.get(`/users/${Cookies.get('idUser')}`)
             const response = data.data
             if (status == 200) {
                 return response
@@ -57,9 +60,9 @@ export const useUserStore = defineStore('User', () => {
             return appError
         }
     }
-       async function put(user, userId) {
+       async function put(user) {
         try {
-            const { data, status } = await api.put(`/users/${userId}`, user)
+            const { data, status } = await api.put(`/users/${Cookies.get('idUser')}`, user)
             const response = data.data
             if (status == 200) {
                 return response

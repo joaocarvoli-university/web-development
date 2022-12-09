@@ -1,5 +1,6 @@
 import { api } from "../baseConfig";
 import { defineStore } from "pinia";
+import Cookies from 'js-cookie'
 
 export const Cart = {
   data: {
@@ -12,8 +13,9 @@ export const useGlassesStore = defineStore("Car", () => {
   async function getByUserId(userId) {
     try {
       const { data, status } = await api.get(
-        `/carts?filters[userId][id][$eq]=${userId}&populate=*`
+        `/carts?filters[userId][id][$eq]=${Cookies.get('idUser')}&populate=*`
       );
+      /*console.log()*/
       const response = data.data;
       if (status == 200) {
         return response;
@@ -24,14 +26,14 @@ export const useGlassesStore = defineStore("Car", () => {
     }
   }
 
-  async function post(idGlasses, idUser) {
+  async function post(idGlasses) {
     try {
       const { data, status } = await api.post(
         `/carts`,
         {
           data: {
             glassesId: idGlasses,
-            userId: idUser,
+            userId: Cookies.get('idUser'),
           },
         }
       );

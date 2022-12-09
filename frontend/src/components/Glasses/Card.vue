@@ -1,6 +1,10 @@
 <script setup>
 
 import { ref } from 'vue'
+import { useGlassesStore } from '../../stores/cart.js'
+
+const useGlasses = useGlassesStore()
+
 
 defineProps({
   id: Number,
@@ -12,7 +16,7 @@ defineProps({
 const change = ref(true)
 
 function addInCart(){
-  change.value = true
+  
 }
 
 
