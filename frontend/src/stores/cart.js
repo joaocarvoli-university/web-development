@@ -35,6 +35,11 @@ export const useGlassesStore = defineStore("Car", () => {
             glassesId: idGlasses,
             userId: Cookies.get('idUser'),
           },
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get('token')}`,
+          },
         }
       );
       const response = data.data;

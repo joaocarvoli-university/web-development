@@ -32,12 +32,12 @@ const routes = [
     nome: 'singup'
   },
   {
-    path: "/sunglasses",
+    path: "/sunglasses/:id",
     component: SunGlasses,
     nome: 'sunglasses'
   },
   {
-    path: "/prescriptionGlasses",
+    path: "/prescriptionGlasses/:id",
     component: PrescriptionGlasses,
     nome: 'prescriptionGlasses'
   },
