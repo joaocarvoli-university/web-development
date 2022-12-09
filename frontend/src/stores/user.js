@@ -39,7 +39,7 @@ export const useUserStore = defineStore('User', () => {
                 role: ""
             }
             Cookies.set('token', user.value.jwt)
-            Cookies.set('idUser', user.id)
+            Cookies.set('idUser', user.value.id)
             const userRole = await getRole(user)
             user.value.role = userRole
             Cookies.set('role', user.value.role)
@@ -111,7 +111,6 @@ export const useUserStore = defineStore('User', () => {
         } catch (error) {
             return getAppError(error)
         }
-
     }
     return { User, authenticate, post, getByUserId, put, getRole }
 })

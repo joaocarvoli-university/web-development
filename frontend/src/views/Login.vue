@@ -27,20 +27,20 @@ async function authenticate(event){
     event.stopPropagation()
     if(identifier.value && password.value) {
         const result = await userStore.authenticate(identifier.value, password.value)
-        console.log(result)
-        if(result){
-            validationMessage.value = ""
-            let redirect = "/"
-            /*if(store.isAdmin) {
-                redirect = route.query.redirect ? route.query.redirect: "/sunglasses"
-            }*/
-            router.push(redirect)
-        }
-        if(isApplicationError(result)) {
-            validationMessage.value = result.message
-        } else {
-            
-        }
+        
+        //if(result){
+        //    validationMessage.value = ""
+        //    let redirect = "/"
+        //    /*if(store.isAdmin) {
+        //        redirect = route.query.redirect ? route.query.redirect: "/sunglasses"
+        //    }*/
+        //    router.push(redirect)
+        //}
+        //if(isApplicationError(result)) {
+        //    validationMessage.value = result.message
+        //} else {
+        //    
+        //}
     }
 }
 

@@ -13,8 +13,7 @@ const props = defineProps({
 
 async function addInCart() {
   try {
-    let idUser = route.fullPath.split("/")
-    const { data, status } = await useGlasses.post(props.id, idUser[2], "")
+    const { data, status } = await useGlasses.post(props.id)
     if (status == 200) {
       alert("Produto adicionado com sucesso")
     }

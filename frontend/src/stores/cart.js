@@ -52,18 +52,16 @@ export const useGlassesStore = defineStore("Car", () => {
     }
   }
 
-  async function remove(idCart) {
+  async function removeCart(idCart) {
     try {
-      // fazer autenticação
-      const { data, status } = await api.delete(`/carts${idCart}`);
-      /*
-,
+      const { data, status } = await api.delete(
+        `/carts/${idCart}`,
         {
           headers: {
-            Authorization: `Bearer ${token}`,
+            Authorization: `Bearer ${Cookies.get('token')}`,
           },
         }
-      */
+      );
       const response = data.data;
       if (status == 200) {
         return response;
@@ -72,7 +70,8 @@ export const useGlassesStore = defineStore("Car", () => {
       console.log(error);
       return error;
     }
+
   }
 
-  return { getByUserId, post, remove };
+  return { getByUserId, post, removeCart };
 });

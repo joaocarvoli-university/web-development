@@ -16,6 +16,13 @@ async function getCartItems(){
     }
 }
 
+async function removeCartItems(){
+    const result = await cartStore.removeCart(items.value[0].id)
+    if(result){
+        items.value = result
+    }
+}
+
 onBeforeMount(async() => getCartItems())
 </script>
 
@@ -28,7 +35,10 @@ onBeforeMount(async() => getCartItems())
             <h1>Carrinho</h1>
           </div>
         </div>
-        <div class="row">
+    <button class="btn btn-danger btn-sm mb-2" type="reset" @click="removeCartItems">
+         Reset
+    </button>
+        <div class="row" v-if="items[0]">
             <Cart v-for="item in items[0].attributes.glassesId.data" :key="item.id"
             :id="item.id"
             :name="item.attributes.name"
