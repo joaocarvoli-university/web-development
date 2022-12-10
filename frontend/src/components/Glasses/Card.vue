@@ -1,8 +1,9 @@
 <script setup>
-import { useGlassesStore } from '../../stores/cart.js'
+import { useCartStore } from '../../stores/cart.js'
 import { useRoute, useRouter } from 'vue-router';
+import { store } from '../../stores/loggedUser.js'
 const route = useRoute()
-const useGlasses = useGlassesStore()
+const useGlasses = useCartStore()
 
 const props = defineProps({
   id: Number,
@@ -13,10 +14,7 @@ const props = defineProps({
 
 async function addInCart() {
   try {
-    const { data, status } = await useGlasses.post(props.id)
-    if (status == 200) {
-      alert("Produto adicionado com sucesso")
-    }
+    store.commit("putOnQueue", props.id)
   } catch (err) {
     console.log(err)
   }
