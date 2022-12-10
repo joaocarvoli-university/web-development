@@ -1,5 +1,5 @@
 <script setup>
-import { store } from './router/statesControl.js'
+import { store } from './stores/loggedUser.js'
 </script>
   
   

@@ -7,8 +7,8 @@ import Password from '../components/Profile/Password.vue';
 import { onBeforeMount, ref } from 'vue'
 import { useUserStore } from '../stores/user'
 import { useRoute, useRouter } from 'vue-router';
-import { store } from '../router/statesControl.js'
-import { doLogout } from '../router/logout.js'
+import { store } from '../stores/loggedUser.js'
+import { doLogout } from '../mixing/logout.js'
 
 const route = useRoute()
 const router = useRouter()
@@ -43,7 +43,7 @@ async function updateUser() {
 
 <template>
   <div>
-  <button class="btn btn-danger btn-sm logout" type="reset" v-if="store.state.authenticated">Logout</button>
+    <button class="btn btn-danger btn-sm logout" type="reset" v-if="store.state.authenticated" @click="doLogout">Logout</button>
   <div class="container bootstrap snippet">
     <div class="row">
       <div class="col-sm-12">

@@ -1,11 +1,11 @@
 <script setup>
-import { store } from '../router/statesControl.js'
-import { doLogout } from '../router/logout.js'
+import { store } from '../stores/loggedUser.js'
+import { doLogout } from '../mixing/logout.js'
 </script>
 
 <template>
 <div>
-  <button class="btn btn-danger btn-sm logout" type="reset" v-if="store.state.authenticated">Logout</button>
+  <button class="btn btn-danger btn-sm logout" type="reset" v-if="store.state.authenticated" @click="doLogout">Logout</button>
   <div class="text">
     <h1>403</h1>
     <h2>Você não tem permissão para acessar esse recurso.</h2>

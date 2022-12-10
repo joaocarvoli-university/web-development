@@ -1,6 +1,10 @@
 <script setup>
-import { store } from '../router/statesControl.js'
-import { doLogout } from '../router/logout.js'
+import { store } from '../stores/loggedUser.js'
+import { doLogout } from '../mixing/logout.js'
+import { useCartStore } from '../stores/cart'
+import { onBeforeMount } from 'vue'
+
+
 </script>
 
 <template>

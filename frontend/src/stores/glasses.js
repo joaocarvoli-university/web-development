@@ -32,7 +32,7 @@ export const useGlassesStore = defineStore('Glasses', ()=> {
             const { data, status } = await api.get(`/many-glasses` ,{params : {id: id}})
             const response = data.data
             if(status == 200){
-                items.value = response
+                //items.value = response
             }
         }
         catch(error){
@@ -49,7 +49,7 @@ export const useGlassesStore = defineStore('Glasses', ()=> {
             })
             const response = data.data
             if(status == 200){
-                items.value = response
+                //items.value = response
             }
         }
         catch(error){
@@ -57,7 +57,7 @@ export const useGlassesStore = defineStore('Glasses', ()=> {
         }
     }
 
-    async function remove(id) {
+    /*async function remove(id) {
         try {
             const { data } = await api.delete(`/many-glasses/`,{params : {id: id}}, {
                 headers: authenticationHeader(store.token)
@@ -83,6 +83,6 @@ export const useGlassesStore = defineStore('Glasses', ()=> {
         } catch(error) {
             return getAppError(error)
         }
-    }
-    return {Glasses,all, create, get, remove, update }
+    }*/
+    return {Glasses,all, create, get }
 })

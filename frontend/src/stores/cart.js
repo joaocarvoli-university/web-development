@@ -9,19 +9,17 @@ export const Cart = {
   },
 };
 
-export const useGlassesStore = defineStore("Car", () => {
-  async function getByUserId(userId) {
+export const useCartStore = defineStore("Cart", () => {
+  async function getByUserId() {
     try {
       const { data, status } = await api.get(
         `/carts?filters[userId][id][$eq]=${Cookies.get('idUser')}&populate=*`
       );
-      /*console.log()*/
       const response = data.data;
       if (status == 200) {
-        return response;
+        return response
       }
     } catch (error) {
-      console.log(error);
       return error;
     }
   }
@@ -52,6 +50,32 @@ export const useGlassesStore = defineStore("Car", () => {
     }
   }
 
+  async function put(idCart, newItems) {
+    try {
+      const { data, status } = await api.put(
+        `/carts/${idCart}`,
+        {
+          data: {
+            glassesId: newItems
+          }
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get('token')}`,
+          },
+        }
+      );
+      const response = data.data;
+      if (status == 200) {
+        return response;
+      }
+    } catch (error) {
+      console.log(error);
+      return error;
+    }
+
+  }
+
   async function removeCart(idCart) {
     try {
       const { data, status } = await api.delete(
@@ -73,5 +97,5 @@ export const useGlassesStore = defineStore("Car", () => {
 
   }
 
-  return { getByUserId, post, removeCart };
+  return { getByUserId, post, removeCart, put };
 });

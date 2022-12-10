@@ -1,37 +1,53 @@
 <script setup>
 import Cart from '../components/Cart.vue'
-import { onBeforeMount, ref } from 'vue'
-import { useGlassesStore } from '../stores/cart'
+import { onBeforeMount, ref, onBeforeUpdate } from 'vue'
+import { useCartStore } from '../stores/cart'
 import { useRouter, useRoute } from 'vue-router';
-import { store } from '../router/statesControl.js'
-import { doLogout } from '../router/logout.js'
+import { store } from '../stores/loggedUser.js'
+import { doLogout } from '../mixing/logout.js'
+import Cookies from 'js-cookie'
 
 const route = useRoute()
-
-const items = ref([])
-const cartStore = useGlassesStore()
+const cartStore = useCartStore()
 
 async function getCartItems(){
-    let idUser = route.fullPath.split("/cart/")
-    const result = await cartStore.getByUserId(idUser[1])
-    if(result){
-        items.value = result
-    }
-}
-
-async function removeCartItems(){
-    const result = await cartStore.removeCart(items.value[0].id)
-    if(result){
-        items.value = result
+    try {
+        const loadingItems = await cartStore.getByUserId()
+        if(loadingItems[0].attributes.glassesId.data.length == 0){
+            if(store.state.cartToBeAdded.length > 0){
+                const newItems = Array.from(new Set(store.state.cartToBeAdded))
+                const firstRegister = await cartStore.put(store.state.cart[0].id, newItems)
+                if(firstRegister) {
+                    store.commit("loadCart", firstRegister)
+                    store.commit("clearQueue")
+                }
+            }
+        } else {
+            if(new Set(store.state.cartToBeAdded).size > 0){
+                const newItems = Array.from(new Set(store.state.cartToBeAdded))
+                const updatingItems = await cartStore.put(store.state.cart[0].id, store.state.cart.concat(store.state.cartToBeAdded))
+                if(updatingItems) {
+                    store.commit("updateCart", updatingItems)
+                    store.commit("clearQueue")
+                }
+            }
+        }
+    } catch (err){
+        console.log(err)
     }
 }
 
 onBeforeMount(async() => getCartItems())
+
+async function removeCart(){
+    const result = await cartStore.removeCart(store.state.cart[0].id)
+    store.commit("removeCart")
+}
 </script>
 
 <template>
 <div>
-  <button class="btn btn-danger btn-sm logout" type="reset" v-if="store.state.authenticated">Logout</button>
+    <button class="btn btn-danger btn-sm logout" type="reset" v-if="store.state.authenticated" @click="doLogout">Logout</button>
   <section class="section-products">
     <div class="container">
       <div class="row justify-content-center text-center">
@@ -40,11 +56,12 @@ onBeforeMount(async() => getCartItems())
             <h1>Carrinho</h1>
           </div>
         </div>
-    <button class="btn btn-danger btn-sm mb-2" type="reset" @click="removeCartItems">
+    <button class="btn btn-danger btn-sm mb-2" type="reset" v-if="store.state.cart[0]" @click="removeCart">
          Reset
     </button>
-        <div class="row" v-if="items[0]">
-            <Cart v-for="item in items[0].attributes.glassesId.data" :key="item.id"
+    <h1 v-else>Você não possui nenhum produto no carrinho</h1>
+        <div class="row" v-if="store.state.cart[0]">
+            <Cart v-for="item in store.state.cart[0].attributes.glassesId.data" :key="item.id"
             :id="item.id"
             :name="item.attributes.name"
             :price="item.attributes.price"
