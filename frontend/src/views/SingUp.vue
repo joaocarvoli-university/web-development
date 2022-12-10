@@ -4,6 +4,7 @@ import { useRouter, useRoute } from 'vue-router';
 import { useUserStore } from '../stores/user';
 import { isApplicationError } from '../mixing/errorMessageMixing'
 
+
 const name = ref('')
 const city = ref('')
 const lastName = ref('')

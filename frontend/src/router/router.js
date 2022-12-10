@@ -9,47 +9,49 @@ import Cart from '../views/CartPage.vue'
 import AboutUs from "../views/Aboutus.vue"
 import Page403 from '../views/Page403.vue'
 import Page404 from '../views/Page404.vue'
+import { store } from './statesControl.js'
 
 const routes = [
   {
     path: "/",
     component: Home,
-    nome: 'home'
   },
   {
     path: "/login",
     component: Login,
-    nome: 'login'
+    name: 'Login'
   },
   {
     path: "/profile",
     component: Profile,
-    nome: 'profile'
+    beforeEnter: (to, from, next) => {
+      if(store.state.authenticated == false) next({path:"/login"});
+      else next()
+    }
   },
   {
     path: "/singup",
     component: SingUp,
-    nome: 'singup'
   },
   {
     path: "/sunglasses",
     component: SunGlasses,
-    nome: 'sunglasses'
   },
   {
     path: "/prescriptionGlasses",
     component: PrescriptionGlasses,
-    nome: 'prescriptionGlasses'
   },
   {
     path: "/cart",
     component: Cart,
-    nome: 'cart'
+    beforeEnter: (to, from, next) => {
+      if(store.state.authenticated == false) next("/login");
+      else next()
+    }
   },
   {
     path: "/aboutus",
     component: AboutUs,
-    nome: 'aboutus'
   },
   {
     path: '/forbiden',

@@ -1,9 +1,11 @@
 <script setup>
-
 import Card from '../components/Glasses/Card.vue'
 import { onBeforeMount } from 'vue'
 import { useGlassesStore } from '../stores/glasses.js'
 import { ref } from 'vue'
+import { store } from '../router/statesControl.js'
+import { doLogout } from '../router/logout.js'
+
 const items = ref([])
 const glassesStore = useGlassesStore()
 
@@ -22,8 +24,9 @@ onBeforeMount(async() => getGlassesUpdate())
 </script>
 
 <template>
+<div>
+  <button class="btn btn-danger btn-sm logout" type="reset" v-if="store.state.authenticated">Logout</button>
   <section class="section-products">
-
     <div class="container">
       <div class="row justify-content-center text-center">
         <div class="col-md-8 col-lg-6">
@@ -42,6 +45,7 @@ onBeforeMount(async() => getGlassesUpdate())
       </div>
     </div>
   </section>
+</div>
 </template>
 
 <style>

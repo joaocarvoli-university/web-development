@@ -7,6 +7,9 @@ import Password from '../components/Profile/Password.vue';
 import { onBeforeMount, ref } from 'vue'
 import { useUserStore } from '../stores/user'
 import { useRoute, useRouter } from 'vue-router';
+import { store } from '../router/statesControl.js'
+import { doLogout } from '../router/logout.js'
+
 const route = useRoute()
 const router = useRouter()
 const userStore = useUserStore()
@@ -39,6 +42,8 @@ async function updateUser() {
 </script>
 
 <template>
+  <div>
+  <button class="btn btn-danger btn-sm logout" type="reset" v-if="store.state.authenticated">Logout</button>
   <div class="container bootstrap snippet">
     <div class="row">
       <div class="col-sm-12">
@@ -77,6 +82,7 @@ async function updateUser() {
         </div>
       </div>
     </div>
+  </div>
   </div>
 </template>
 

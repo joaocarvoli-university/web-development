@@ -3,6 +3,7 @@ import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
 import { getAppError } from '../mixing/errorMessageMixing'
 import Cookies from 'js-cookie'
+import { store } from '../router/statesControl.js'
 
 
 export const User = {
@@ -38,6 +39,7 @@ export const useUserStore = defineStore('User', () => {
                 email: data.user.email,
                 role: ""
             }
+            store.commit('setAuthentication')
             Cookies.set('token', user.value.jwt)
             Cookies.set('idUser', user.value.id)
             const userRole = await getRole(user)

@@ -1,5 +1,5 @@
 <script setup>
-//import  Cart  from "./components/Cart.vue";
+import { store } from './router/statesControl.js'
 </script>
   
   
@@ -45,7 +45,8 @@
 </nav>
 
 <main>
-  <router-view></router-view>
+  <router-view>
+  </router-view>
 </main>
 
 <footer>
@@ -78,6 +79,10 @@
 </template>
 
 <style>
+.logout {
+  display: grid;
+  position: relative;
+}
 div {
     font-family: 'Poppins';
 }

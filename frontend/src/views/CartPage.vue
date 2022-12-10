@@ -3,6 +3,9 @@ import Cart from '../components/Cart.vue'
 import { onBeforeMount, ref } from 'vue'
 import { useGlassesStore } from '../stores/cart'
 import { useRouter, useRoute } from 'vue-router';
+import { store } from '../router/statesControl.js'
+import { doLogout } from '../router/logout.js'
+
 const route = useRoute()
 
 const items = ref([])
@@ -27,6 +30,8 @@ onBeforeMount(async() => getCartItems())
 </script>
 
 <template>
+<div>
+  <button class="btn btn-danger btn-sm logout" type="reset" v-if="store.state.authenticated">Logout</button>
   <section class="section-products">
     <div class="container">
       <div class="row justify-content-center text-center">
@@ -49,6 +54,7 @@ onBeforeMount(async() => getCartItems())
       </div>
     </div>
   </section>
+</div>
 </template>
 
 <style>
