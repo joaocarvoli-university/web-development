@@ -34,9 +34,9 @@ Carrinho
 ## :desktop_computer: Tecnologias e frameworks utilizados
 
 ### **Frontend:**
-## HTML, CSS, JavaScript e VueJS
+- HTML, CSS, JavaScript e VueJS
 ### **Backend**
-## Strapi
+- Strapi
 
 | Entidade| Criação | Leitura | Atualização | Remoção |
 | --- | --- | --- | --- | --- |
