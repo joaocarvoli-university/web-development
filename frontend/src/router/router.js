@@ -65,6 +65,13 @@ const routes = [
   {
     path: '/admin',
     component: AdminPage,
+    beforeEnter: (to, from, next) => {
+      if(store.state.authenticated == false) next({path:"/login"});
+      else {
+        if (store.state.role == "Admin User") next()
+        else next({path:"/forbiden"})
+      }
+    }
   }
 
 ]

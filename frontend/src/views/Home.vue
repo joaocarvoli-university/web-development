@@ -1,31 +1,42 @@
 <script setup>
-import { store } from '../stores/loggedUser.js'
-import { doLogout } from '../mixing/logout.js'
-import { useCartStore } from '../stores/cart'
-import { onBeforeMount } from 'vue'
-
-
+import { store } from "../stores/loggedUser.js";
+import { doLogout } from "../mixing/logout.js";
 </script>
 
 <template>
   <div>
-  <button class="btn btn-danger btn-sm logout" type="reset" v-if="store.state.authenticated" @click="doLogout">Logout</button>
-  <div class="container">
-  <div class="row">
-    <div class="col-2 text-main">
-      <h1><strong>Seja bem vindo(a)</strong></h1>
-      <p>ao lugar onde se preocupamos com a <br> sua visão!</p>
-    </div>
-    <router-link to="/login">
-      <button type="button" class="login-button btn btn-danger" v-if="!store.state.authenticated">Fazer login</button>
-    </router-link>
-    <div class="col">
-      <img class="constumer-photo" src="../assets/diadoconsumidor.png">
+    <button
+      class="btn btn-danger btn-sm logout"
+      type="reset"
+      v-if="store.state.authenticated"
+      @click="doLogout"
+    >
+      Logout
+    </button>
+    <div class="container">
+      <div class="row">
+        <div class="col-2 text-main">
+          <h1><strong>Seja bem vindo(a)</strong></h1>
+          <p>
+            ao lugar onde se preocupamos com a <br />
+            sua visão!
+          </p>
+        </div>
+        <router-link to="/login">
+          <button
+            type="button"
+            class="login-button btn btn-danger"
+            v-if="!store.state.authenticated"
+          >
+            Fazer login
+          </button>
+        </router-link>
+        <div class="col">
+          <img class="constumer-photo" src="../assets/diadoconsumidor.png" />
+        </div>
+      </div>
     </div>
   </div>
-  </div>
-</div>
-    
 </template>
 
 <style>

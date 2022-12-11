@@ -4,7 +4,7 @@ import PhoneForms from '../components/Profile/PhoneForms.vue';
 import EmailForms from '../components/Profile/EmailForms.vue';
 import Location from '../components/Profile/Location.vue';
 import Password from '../components/Profile/Password.vue';
-import { onBeforeMount, ref } from 'vue'
+import { ref } from 'vue'
 import { useUserStore } from '../stores/user'
 import { useRoute, useRouter } from 'vue-router';
 import { store } from '../stores/loggedUser.js'

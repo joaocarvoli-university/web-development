@@ -1,6 +1,7 @@
 import { api } from "../baseConfig";
 import { defineStore } from "pinia";
 import Cookies from 'js-cookie'
+import { getAppError } from "../mixing/errorMessageMixing";
 
 export const Cart = {
   data: {
@@ -16,11 +17,9 @@ export const useCartStore = defineStore("Cart", () => {
         `/carts?filters[userId][id][$eq]=${Cookies.get('idUser')}&populate=*`
       );
       const response = data.data;
-      if (status == 200) {
-        return response
-      }
+      if (status == 200) return response
     } catch (error) {
-      return error;
+      return getAppError(error);
     }
   }
 
@@ -41,11 +40,8 @@ export const useCartStore = defineStore("Cart", () => {
         }
       );
       const response = data.data;
-      if (status == 200) {
-        return response;
-      }
+      if (status == 200) return response
     } catch (error) {
-      console.log(error);
       return error;
     }
   }
@@ -66,11 +62,8 @@ export const useCartStore = defineStore("Cart", () => {
         }
       );
       const response = data.data;
-      if (status == 200) {
-        return response;
-      }
+      if (status == 200) return response
     } catch (error) {
-      console.log(error);
       return error;
     }
 
@@ -87,15 +80,11 @@ export const useCartStore = defineStore("Cart", () => {
         }
       );
       const response = data.data;
-      if (status == 200) {
-        return response;
-      }
+      if (status == 200) return response;
     } catch (error) {
-      console.log(error);
       return error;
     }
 
   }
-
   return { getByUserId, post, removeCart, put };
 });

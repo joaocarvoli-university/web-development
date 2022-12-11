@@ -1,6 +1,7 @@
 import { api } from '../baseConfig'
 import { defineStore } from 'pinia'
-
+import Cookies from 'js-cookie'
+import { getAppError } from "../mixing/errorMessageMixing";
 
 
 export const Glasses = {
@@ -13,18 +14,14 @@ export const Glasses = {
     description: String
 }
 
-
-
 export const useGlassesStore = defineStore('Glasses', () => {
     async function all(glassesType) {
         try {
             const { data, status } = await api.get(`/many-glasses?filters[type][$eq]=${glassesType}`)
             const response = data.data
-            if (status == 200) {
-                return response
-            }
+            if (status == 200) return response
         } catch (error) {
-            return error
+            return getAppError(error)
         }
     }
 
@@ -32,52 +29,42 @@ export const useGlassesStore = defineStore('Glasses', () => {
         try {
             const { data, status } = await api.get(`/many-glasses`, { params: { id: id } })
             const response = data.data
-            if (status == 200) {
-                //items.value = response
-            }
+            if (status == 200) return response
         } catch (error) {
-            console.log(error)
+            return getAppError(error)
         }
     }
 
     async function create(glasses) {
         try {
-            const { data, status } = await api.post(`/many-glasses`, glasses)
-            const response = data.data
-            if (status == 200) {
-                return response
+            const { data, status } = await api.post(`/many-glasses`, 
+            {
+                data: glasses
             }
+            , {
+                headers: {
+                    Authorization: `Bearer ${Cookies.get('token')}`
+                }
+            })
+            const response = data.data
+            if (status == 200) return response
         } catch (error) {
-            console.log(error)
+            return getAppError(error)
         }
     }
 
-    /*async function remove(id) {
+    async function remove(id) {
         try {
-            const { data } = await api.delete(`/many-glasses/`,{params : {id: id}}, {
-                headers: authenticationHeader(store.token)
+            const { data, status } = await api.delete(`/many-glasses/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${Cookies.get('token')}`
+                }
             })
-            const glassDeleted = Glasses.value.find( Glasses => Glasses.id === id)
-            if (glassDeleted) {
-                Glasses.value.splice(Glasses.value.indexOf(glassDeleted), 1)
-            }
-            return data.data
+            const response = data.data
+            if (status == 200) return response
         } catch(error) {
             return getAppError(error)
         }
     }
-     async function update(glasses, newCover){
-        const { id } = glasses
-        try {
-            const { data } = await api.put(`/many-glasses/`,{params : {id: id}}, newCover, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                }
-            })
-            return get(id)
-        } catch(error) {
-            return getAppError(error)
-        }
-    }*/
-    return { Glasses, all, create, get }
+    return { all, create, get, remove }
 })

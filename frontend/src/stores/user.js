@@ -1,7 +1,7 @@
 import { api } from '../baseConfig'
 import { defineStore } from 'pinia'
-import { ref, computed } from 'vue'
-import { getAppError } from '../mixing/errorMessageMixing'
+import { ref } from 'vue'
+import { getAppError, isApplicationError } from '../mixing/errorMessageMixing'
 import Cookies from 'js-cookie'
 import { store } from './loggedUser.js'
 
@@ -37,12 +37,13 @@ export const useUserStore = defineStore('User', () => {
                 id: data.user.id,
                 username: data.user.username,
                 email: data.user.email,
-                role: ""
+                role: String
             }
             store.commit('setAuthentication')
             Cookies.set('token', user.value.jwt)
             Cookies.set('idUser', user.value.id)
             const userRole = await getRole(user)
+            if(isApplicationError(userRole)) throw userRole
             store.commit('setAuthorization', userRole)
             return user.value
         } catch (error) {
@@ -58,22 +59,16 @@ export const useUserStore = defineStore('User', () => {
         try {
             const { data, status } = await api.get(`/users/${Cookies.get('idUser')}`)
             const response = data.data
-            if (status == 200) {
-                return response
-            }
+            if (status == 200) return response
         } catch (error) {
-            console.log(error)
-            return error
+            return getAppError(error)
         }
     }
     async function post(user) {
         try {
             const { data, status } = await api.post("/users", user)
             const response = data.data
-            if (status == 200) {
-                return response.role.name
-            }
-
+            if (status == 200) return response
         } catch (error) {
             const appError = getAppError(error)
             if (appError.name === "ValidationError") {
@@ -87,10 +82,7 @@ export const useUserStore = defineStore('User', () => {
         try {
             const { data, status } = await api.put(`/users/${Cookies.get('idUser')}`, user)
             const response = data.data
-            if (status == 200) {
-                return response
-            }
-
+            if (status == 200) return response 
         } catch (error) {
             const appError = getAppError(error)
             if (appError.name === "ValidationError") {
@@ -102,16 +94,15 @@ export const useUserStore = defineStore('User', () => {
 
     async function getRole(user) {
         try {
-            const res = await api.get("/users/me?populate=role", {
+            const {data, status} = await api.get("/users/me?populate=role", {
                 headers: {
-                    Authorization: `Bearer ${user.value.jwt}`
+                    Authorization: `Bearer ${Cookies.get('token')}`
                 },
             })
-            const { data } = res
-            return data.role.name
+            if(status == 200) return data.role.name
         } catch (error) {
             return getAppError(error)
         }
     }
-    return { User, authenticate, post, getByUserId, put, getRole }
+    return { authenticate, post, getByUserId, put, getRole }
 })
