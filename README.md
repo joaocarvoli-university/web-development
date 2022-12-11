@@ -40,7 +40,7 @@ Thiago Viana Bezerra - 496254
 | Entidade| Criação | Leitura | Atualização | Remoção |
 | --- | --- | --- | --- | --- |
 | Usuario |   X     |    X    |     X       |
-| Glasses |   X     |    X    |     X       |    X    |
+| Glasses |   X     |    X    |             |    X    |
 | Cart    |   X     |    X    |     X       |    X    |
 
 ## :neckbeard: Rotas da API REST utilizadas
