@@ -71,5 +71,27 @@ Carrinho
 | Método HTTP | URL |
 | --- | --- |
   Users
-| GET | api/users |
+| GET | api//users/:idUser|
+| GET | api/users/me?populate=role|
 | POST | api//userId |
+| POST | api/auth/local |
+| PUT | api/users/:idUser |
+
+
+| Método HTTP | URL |
+| --- | --- |
+  Cart
+| GET | api/carts?filters[userId][id][$eq]=:idUser&populate=* |
+| POST | api/carts |
+| PUT | api/carts/:idCart |
+| DELETE | api/carts/:idCart |
+
+
+
+| Método HTTP | URL |
+| --- | --- |
+  Glasses
+| GET | api/many-glasses?filters[type][$eq]=:glassesType|
+| GET | api/many-glasses|
+| POST | api/many-glasses|
+| DELETE | api/many-glasses/:idGlasses |
