@@ -1,11 +1,10 @@
 <script setup>
 import Cart from '../components/Cart.vue'
-import { onBeforeMount, ref, onBeforeUpdate } from 'vue'
+import { onBeforeMount } from 'vue'
 import { useCartStore } from '../stores/cart'
-import { useRouter, useRoute } from 'vue-router';
+import { useRoute } from 'vue-router';
 import { store } from '../stores/loggedUser.js'
 import { doLogout } from '../mixing/logout.js'
-import Cookies from 'js-cookie'
 
 const route = useRoute()
 const cartStore = useCartStore()
@@ -13,23 +12,37 @@ const cartStore = useCartStore()
 async function getCartItems(){
     try {
         const loadingItems = await cartStore.getByUserId()
+        store.commit("setCartId", loadingItems[0].id)
         if(loadingItems[0].attributes.glassesId.data.length == 0){
-            if(store.state.cartToBeAdded.length > 0){
+            if(new Set(store.state.cartToBeAdded).size > 0){
                 const newItems = Array.from(new Set(store.state.cartToBeAdded))
-                const firstRegister = await cartStore.put(store.state.cart[0].id, newItems)
+                const firstRegister = await cartStore.put(store.state.cartId, newItems)
                 if(firstRegister) {
-                    store.commit("loadCart", firstRegister)
-                    store.commit("clearQueue")
+                    const loadingItemsSecond = await cartStore.getByUserId()
+                    if(loadingItemsSecond){
+                        store.commit("loadCart", loadingItemsSecond)
+                        store.commit("clearQueue")
+                    }
                 }
             }
         } else {
             if(new Set(store.state.cartToBeAdded).size > 0){
                 const newItems = Array.from(new Set(store.state.cartToBeAdded))
-                const updatingItems = await cartStore.put(store.state.cart[0].id, store.state.cart.concat(store.state.cartToBeAdded))
-                if(updatingItems) {
-                    store.commit("updateCart", updatingItems)
-                    store.commit("clearQueue")
+                const oldItems = []
+                for (const index in store.state.cart[0].attributes.glassesId.data){
+                    oldItems.push(store.state.cart[0].attributes.glassesId.data[index].id)
                 }
+                const items = Array.from(new Set(oldItems.concat(newItems)))
+                const updatingItems = await cartStore.put(store.state.cartId, items)
+                if(updatingItems) {
+                    const loadingItemsSecondTwo = await cartStore.getByUserId()
+                    if(loadingItemsSecondTwo){
+                        store.commit("loadCart", loadingItemsSecondTwo)
+                        store.commit("clearQueue")
+                    }
+                }
+            } else {
+                store.commit("loadCart", loadingItems)
             }
         }
     } catch (err){

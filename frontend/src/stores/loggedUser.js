@@ -7,16 +7,14 @@ export const store = new Vuex.Store(
           role: "",
           cart: [],
           cartCleaned: [],
-          cartToBeAdded: []
+          cartToBeAdded: [],
+          cartId: Number
       },
       mutations: {
           setAuthentication(state) { state.authenticated = !state.authenticated },
           setAuthorization(state, role){ state.role = role },
           loadCart(state, cartItems){
             state.cart = cartItems
-          },
-          updateCart(state, cartItems){
-            state.cart = state.cart.concat(cartItems)
           },
           removeCart(state){ 
             state.cart = state.cartCleaned
@@ -26,7 +24,10 @@ export const store = new Vuex.Store(
           },
           clearQueue(state){
             state.cartToBeAdded = state.cartCleaned
+          },
+          setCartId(state, cartId){
+            state.cartId = cartId
           }
-      }
   }
+}
 )
