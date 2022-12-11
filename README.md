@@ -47,29 +47,27 @@ Carrinho
 
 ## :neckbeard: Rotas da API REST utilizadas
 
+### Users
 | Método HTTP | URL |
 | --- | --- |
-  Users
 | GET | api//users/:idUser|
 | GET | api/users/me?populate=role|
 | POST | api//userId |
 | POST | api/auth/local |
 | PUT | api/users/:idUser |
 
-
+### Cart
 | Método HTTP | URL |
 | --- | --- |
-  Cart
 | GET | api/carts?filters[userId][id][$eq]=:idUser&populate=* |
 | POST | api/carts |
 | PUT | api/carts/:idCart |
 | DELETE | api/carts/:idCart |
 
 
-
+### Glasses
 | Método HTTP | URL |
 | --- | --- |
-  Glasses
 | GET | api/many-glasses?filters[type][$eq]=:glassesType|
 | GET | api/many-glasses|
 | POST | api/many-glasses|
