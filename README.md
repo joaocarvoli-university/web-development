@@ -17,10 +17,9 @@ Thiago Viana Bezerra - 496254
 
 ## :spiral_calendar: Entidades ou tabelas do sistema
 
-Usuário
-Óculos de grau
-Óculos de sol
-Carrinho
+- Usuário
+- Óculos
+- Carrinho
 
 ## :triangular_flag_on_post: Principais funcionalidades da aplicação
 
@@ -43,7 +42,6 @@ Carrinho
 | Usuario |   X     |    X    |     X       |
 | Glasses |   X     |    X    |     X       |    X    |
 | Cart    |   X     |    X    |     X       |    X    |
-> Lembre-se que é necessário implementar o CRUD de pelo menos duas entidades.
 
 ## :neckbeard: Rotas da API REST utilizadas
 
