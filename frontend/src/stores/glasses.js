@@ -5,54 +5,49 @@ import { defineStore } from 'pinia'
 
 export const Glasses = {
     id: String,
-    amount:Number,
+    amount: Number,
     price: Number,
     name: String,
+    color: String,
+    brand: String,
     description: String
 }
 
 
 
-export const useGlassesStore = defineStore('Glasses', ()=> {
-    async function all(glassesType){
+export const useGlassesStore = defineStore('Glasses', () => {
+    async function all(glassesType) {
         try {
             const { data, status } = await api.get(`/many-glasses?filters[type][$eq]=${glassesType}`)
             const response = data.data
-            if(status == 200){
+            if (status == 200) {
                 return response
             }
-        }
-        catch(error){
+        } catch (error) {
             return error
         }
     }
 
-    async function get(id){
+    async function get(id) {
         try {
-            const { data, status } = await api.get(`/many-glasses` ,{params : {id: id}})
+            const { data, status } = await api.get(`/many-glasses`, { params: { id: id } })
             const response = data.data
-            if(status == 200){
+            if (status == 200) {
                 //items.value = response
             }
-        }
-        catch(error){
+        } catch (error) {
             console.log(error)
         }
     }
 
-    async function create(glasses){
+    async function create(glasses) {
         try {
-            const { data, status } = await api.post(`/many-glasses`, glasses, {
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
+            const { data, status } = await api.post(`/many-glasses`, glasses)
             const response = data.data
-            if(status == 200){
-                //items.value = response
+            if (status == 200) {
+                return response
             }
-        }
-        catch(error){
+        } catch (error) {
             console.log(error)
         }
     }
@@ -84,5 +79,5 @@ export const useGlassesStore = defineStore('Glasses', ()=> {
             return getAppError(error)
         }
     }*/
-    return {Glasses,all, create, get }
+    return { Glasses, all, create, get }
 })

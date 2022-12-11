@@ -43,7 +43,7 @@ function handleBrand(s) { brand.value = s }
 function handleColor(s) { color.value = s }
 function handleType(s) { type.value = s }
 function handleAmount(s) { amount.value = s }
-function handleprice(s) { price.value = s }
+function handlePrice(s) { price.value = s }
 function handleDescription(s) { description.value = s }
 
 
@@ -55,7 +55,7 @@ async function createGlass() {
     if(price.value.length > 0) glass.value.price = price.value
     if(description.value.length > 0) glass.value.description = description.value
     if(amount.value.length > 0) glass.value.amount = amount.value
-    const result = await glasseStrore.post(glass)
+    const result = await glassStore.create(glass)
     if (result) {
       validationMessage.value = ""
       let redirect = `/`
@@ -86,8 +86,6 @@ async function createGlass() {
                                 <p hidden>{{ type }}</p>
                                 <PriceForms @custom-change="handlePrice"></PriceForms>
                                 <p hidden>{{ Price }}</p>
-                                <TypeForms @custom-change="handleType"></TypeForms>
-                                <p hidden>{{ type }}</p>
                                 <ColorForms @custom-change="handleColor"></ColorForms>
                                 <p hidden>{{ color }}</p>
                                 <AmountForms @custom-change="handleAmount"></AmountForms>
