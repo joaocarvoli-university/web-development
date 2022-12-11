@@ -61,15 +61,15 @@ Carrinho
 
 | Entidade| Criação | Leitura | Atualização | Remoção |
 | --- | --- | --- | --- | --- |
-| Entidade 1 | X |  X  |  | X |
-| Entidade 2 | X |    |  X | X |
-| Entidade 3 | X |    |  |  |
-
+| Usuario |   X     |    X    |     X       |
+| Glasses |   X     |    X    |     X       |    X    |
+| Cart    |   X     |    X    |     X       |    X    |
 > Lembre-se que é necessário implementar o CRUD de pelo menos duas entidades.
 
 ## :neckbeard: Rotas da API REST utilizadas
 
 | Método HTTP | URL |
 | --- | --- |
-| GET | api/entidade1/|
-| POST | api/entidade2 |
+  Users
+| GET | api/users |
+| POST | api//userId |
