@@ -76,7 +76,11 @@ export const useUserStore = defineStore('User', () => {
 
     async function put(user) {
         try {
-            const { data, status } = await api.put(`/users/${Cookies.get('idUser')}`, user)
+            const { data, status } = await api.put(`/users/${Cookies.get('idUser')}`, user, {
+                headers: {
+                    Authorization: `Bearer ${Cookies.get('token')}`
+                }
+            })
             const response = data.data
             if (status == 200) return response
         } catch (error) {

@@ -19,6 +19,16 @@ const city = ref('')
 const email = ref('')
 const password = ref('')
 
+const User = {
+    email: String,
+    password: String,
+    username: String,
+    city: String,
+    phone: String
+}
+
+const user = ref(User)
+
 function handleName(s) { name.value = s }
 function handlePhone(s) { phone.value = s }
 function handleCity(s) { city.value = s }
@@ -31,8 +41,20 @@ async function updateUser() {
     if(phone.value.length > 0) user.value.phone = phone.value
     if(city.value.length > 0) user.value.city = city.value
     if(password.value.length > 0) user.value.password = password.value
-    let idUser = route.fullPath.split("/profile/")
-    const result = await userStore.put(idUser[1])
+    console.log({
+        name: name.value,
+        phone: phone.value,
+        city: city.value,
+        email: email.value,
+        password: password.value
+    })
+    const result = await userStore.put({
+        name: name.value,
+        phone: phone.value,
+        city: city.value,
+        email: email.value,
+        password: password.value
+    })
     if (result) {
       validationMessage.value = ""
       let redirect = `/profile/${idUser[1]}`
