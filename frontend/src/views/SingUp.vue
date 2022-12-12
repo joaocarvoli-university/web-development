@@ -22,7 +22,7 @@ function validateEmail() {
 }
 
 function validatePassword() {
-  if (password != passwordValidation) msgPassword.value = "senha inválida";
+  if (password.value !== passwordValidation.value) msgPassword.value = "senha inválida";
   else msgPassword.value = "";
 }
 
@@ -73,13 +73,8 @@ async function registerUser() {
   if (user.value.username && user.value.password && user.value.email) {
     const result = await userStore.post(user.value);
     if (result) {
-      validationMessage.value = "";
       let redirect = "/";
       router.push(redirect);
-    }
-    if (isApplicationError(result)) {
-      validationMessage.value = result.message;
-    } else {
     }
   }
 }

@@ -43,7 +43,7 @@ export const useUserStore = defineStore('User', () => {
             Cookies.set('token', user.value.jwt)
             Cookies.set('idUser', user.value.id)
             const userRole = await getRole(user)
-            if(isApplicationError(userRole)) throw userRole
+            if (isApplicationError(userRole)) throw userRole
             store.commit('setAuthorization', userRole)
             return user.value
         } catch (error) {
@@ -61,7 +61,7 @@ export const useUserStore = defineStore('User', () => {
             const response = data.data
             if (status == 200) return response
         } catch (error) {
-            return getAppError(error)
+            return error
         }
     }
     async function post(user) {
@@ -70,38 +70,30 @@ export const useUserStore = defineStore('User', () => {
             const response = data.data
             if (status == 200) return response
         } catch (error) {
-            const appError = getAppError(error)
-            if (appError.name === "ValidationError") {
-                appError.message = "Nao foi possivel criar a sua conta"
-            }
-            return appError
+            return error
         }
     }
 
-       async function put(user) {
+    async function put(user) {
         try {
             const { data, status } = await api.put(`/users/${Cookies.get('idUser')}`, user)
             const response = data.data
-            if (status == 200) return response 
+            if (status == 200) return response
         } catch (error) {
-            const appError = getAppError(error)
-            if (appError.name === "ValidationError") {
-                appError.message = "Nao foi possivel atualizar seus dados"
-            }
-            return appError
+            return error
         }
     }
 
     async function getRole(user) {
         try {
-            const {data, status} = await api.get("/users/me?populate=role", {
+            const { data, status } = await api.get("/users/me?populate=role", {
                 headers: {
                     Authorization: `Bearer ${Cookies.get('token')}`
                 },
             })
-            if(status == 200) return data.role.name
+            if (status == 200) return data.role.name
         } catch (error) {
-            return getAppError(error)
+            return error
         }
     }
     return { authenticate, post, getByUserId, put, getRole }
