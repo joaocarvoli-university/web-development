@@ -5,6 +5,7 @@ Na HUB você pode comprar aquele óculos de grau ou solar pra ficar *"chavoso"*,
 ## :technologist: Membros da equipe
 
 João Victor Carvalho de Oliveira - 499062
+
 Thiago Viana Bezerra - 496254
 
 ## :people_holding_hands: Papéis ou tipos de usuário da aplicação
@@ -16,10 +17,9 @@ Thiago Viana Bezerra - 496254
 
 ## :spiral_calendar: Entidades ou tabelas do sistema
 
-Usuário
-Óculos de grau
-Óculos de sol
-Carrinho
+- Usuário
+- Óculos
+- Carrinho
 
 ## :triangular_flag_on_post: Principais funcionalidades da aplicação
 
@@ -27,49 +27,46 @@ Carrinho
   - Os usuários poderão ler sobre nós da nossa empresa, assim como visualizar os produtos disponíveis no estoque.
 
 - Acessível a usuários logados:
-  - Os usuários poderão adicionar qualquer produto que esteja disponível no estoque ao carrinho, como também poderão comprar ,editar e excluir os produtos.
+  - Os usuários poderão adicionar qualquer produto que esteja disponível no estoque ao carrinho, como também poderão comprar ,editar e excluir os produtos do seu carrinho.
 
 
 ## :desktop_computer: Tecnologias e frameworks utilizados
 
 ### **Frontend:**
-
-<p align="left"> 
-<a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a> 
-<a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> 
-<a href="https://getbootstrap.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/bootstrap/bootstrap-plain-wordmark.svg" alt="bootstrap" width="40" height="40"/> </a> 
-<a href="https://www.typescriptlang.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/typescript/typescript-original.svg" alt="typescript" width="40" height="40"/> </a> 
-<a href="https://vuejs.org/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/vuejs/vuejs-original-wordmark.svg" alt="vuejs" width="40" height="40"/> </a>
-</p>
-
-#### **Design**
-<a href="https://www.figma.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/figma/figma-icon.svg" alt="figma" width="40" height="40"/> </a> 
-
-
-
-### **Backend:**
-
-<p align="left">
-<a href="https://nodejs.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/nodejs/nodejs-original-wordmark.svg" alt="nodejs" width="40" height="40"/> </a>
-<a href="https://expressjs.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/express/express-original-wordmark.svg" alt="express" width="40" height="40"/> </a> 
-</p>
-
-#### Banco de dados
-<a href="https://www.mongodb.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" alt="mongodb" width="40" height="40"/> </a> 
-## :shipit: Operações implementadas para cada entidade da aplicação
-
+- HTML, CSS, JavaScript e VueJS
+### **Backend**
+- Strapi
 
 | Entidade| Criação | Leitura | Atualização | Remoção |
 | --- | --- | --- | --- | --- |
-| Entidade 1 | X |  X  |  | X |
-| Entidade 2 | X |    |  X | X |
-| Entidade 3 | X |    |  |  |
-
-> Lembre-se que é necessário implementar o CRUD de pelo menos duas entidades.
+| Usuario |   X     |    X    |     X       |
+| Glasses |   X     |    X    |             |    X    |
+| Cart    |   X     |    X    |     X       |    X    |
 
 ## :neckbeard: Rotas da API REST utilizadas
 
+### Users
 | Método HTTP | URL |
 | --- | --- |
-| GET | api/entidade1/|
-| POST | api/entidade2 |
+| GET | api//users/:idUser|
+| GET | api/users/me?populate=role|
+| POST | api//userId |
+| POST | api/auth/local |
+| PUT | api/users/:idUser |
+
+### Cart
+| Método HTTP | URL |
+| --- | --- |
+| GET | api/carts?filters[userId][id][$eq]=:idUser&populate=* |
+| POST | api/carts |
+| PUT | api/carts/:idCart |
+| DELETE | api/carts/:idCart |
+
+
+### Glasses
+| Método HTTP | URL |
+| --- | --- |
+| GET | api/many-glasses?filters[type][$eq]=:glassesType|
+| GET | api/many-glasses|
+| POST | api/many-glasses|
+| DELETE | api/many-glasses/:idGlasses |
